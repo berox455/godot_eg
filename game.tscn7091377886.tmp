@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://bqdenshjsp4ww"]
+
+[ext_resource type="Texture2D" uid="uid://cfqpw80tfd7ge" path="res://background.png" id="1_e2o6t"]
+[ext_resource type="Script" uid="uid://dqlrbspn8wliv" path="res://grass.gd" id="1_feb5d"]
+[ext_resource type="Texture2D" uid="uid://dam2p0odckeyf" path="res://grass-transparent.png" id="2_feb5d"]
+
+[node name="Node2D" type="Node2D" unique_id=1262863614]
+
+[node name="the_game" type="Node" parent="." unique_id=1269241689]
+script = ExtResource("1_feb5d")
+
+[node name="Background" type="Sprite2D" parent="the_game" unique_id=2051863108]
+texture = ExtResource("1_e2o6t")
+
+[node name="eat_grass" type="Button" parent="the_game" unique_id=1814096244]
+offset_left = -759.0
+offset_top = -307.0
+offset_right = -186.0
+offset_bottom = 266.0
+
+[node name="Sprite2D" type="Sprite2D" parent="the_game/eat_grass" unique_id=2142833719]
+texture_filter = 2
+position = Vector2(287, 287)
+texture = ExtResource("2_feb5d")
+
+[node name="Camera2D" type="Camera2D" parent="the_game" unique_id=784535214]
+scale = Vector2(1, 0.9853383)
+zoom = Vector2(0.6, 0.6)
+
+[node name="grass_eaten" type="RichTextLabel" parent="the_game" unique_id=450870177]
+offset_left = 99.0
+offset_top = -32.0
+offset_right = 226.0
+offset_bottom = 37.0
+theme_override_colors/default_color = Color(0, 0.16862746, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_font_sizes/normal_font_size = 50
+text = "grass"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0

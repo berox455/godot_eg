@@ -1,0 +1,147 @@
+[gd_scene format=3 uid="uid://bqdenshjsp4ww"]
+
+[ext_resource type="Texture2D" uid="uid://cfqpw80tfd7ge" path="res://background.png" id="1_e2o6t"]
+[ext_resource type="Script" uid="uid://dqlrbspn8wliv" path="res://grass.gd" id="1_feb5d"]
+[ext_resource type="Texture2D" uid="uid://dam2p0odckeyf" path="res://grass-transparent.png" id="2_feb5d"]
+[ext_resource type="AudioStream" uid="uid://dek18fenvx1ri" path="res://munch.mp3" id="4_7jktm"]
+[ext_resource type="Texture2D" uid="uid://bchknnx4h5v38" path="res://textbox.png" id="4_fc0e3"]
+
+[node name="Node2D" type="Node2D" unique_id=1262863614]
+
+[node name="the_game" type="Node" parent="." unique_id=1269241689]
+script = ExtResource("1_feb5d")
+
+[node name="Camera2D" type="Camera2D" parent="the_game" unique_id=784535214]
+scale = Vector2(1, 0.9853383)
+zoom = Vector2(0.6, 0.6)
+
+[node name="Background" type="Sprite2D" parent="the_game" unique_id=2051863108]
+texture = ExtResource("1_e2o6t")
+
+[node name="eat_grass" type="Button" parent="the_game" unique_id=1814096244]
+offset_left = -710.0
+offset_top = -248.0
+offset_right = -137.0
+offset_bottom = 325.0
+
+[node name="grass_eaten" type="RichTextLabel" parent="the_game/eat_grass" unique_id=450870177]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 37.0
+offset_right = 462.0
+offset_bottom = 106.0
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.28627452, 0.72156864, 0.4627451, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_font_sizes/normal_font_size = 50
+text = "grass eaten: 0"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+
+[node name="Grass" type="Sprite2D" parent="the_game/eat_grass" unique_id=2142833719]
+texture_filter = 2
+position = Vector2(288, 272)
+texture = ExtResource("2_feb5d")
+
+[node name="Munch" type="AudioStreamPlayer2D" parent="the_game/eat_grass" unique_id=41292201]
+stream = ExtResource("4_7jktm")
+
+[node name="mouth_upgrade" type="Node" parent="the_game" unique_id=893768253]
+
+[node name="TextBlock" type="Sprite2D" parent="the_game/mouth_upgrade" unique_id=922247649]
+position = Vector2(441, -139)
+scale = Vector2(1, 0.99999994)
+texture = ExtResource("4_fc0e3")
+
+[node name="label" type="RichTextLabel" parent="the_game/mouth_upgrade/TextBlock" unique_id=2096098550]
+offset_left = -389.0
+offset_top = -38.00002
+offset_right = -349.0
+offset_bottom = 1.9999809
+theme_override_font_sizes/normal_font_size = 50
+text = "Mouth upgrade"
+fit_content = true
+autowrap_mode = 0
+
+[node name="button" type="Button" parent="the_game/mouth_upgrade" unique_id=1021568349]
+offset_left = 490.0
+offset_top = -184.0
+offset_right = 820.0
+offset_bottom = -86.99999
+theme_override_font_sizes/font_size = 30
+text = "   Buy lvl1"
+alignment = 0
+
+[node name="cost" type="RichTextLabel" parent="the_game/mouth_upgrade/button" unique_id=1172528957]
+layout_mode = 0
+offset_left = 164.0
+offset_top = 45.000004
+offset_right = 232.0
+offset_bottom = 73.0
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 20
+text = "cost: 0 "
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="dog" type="Node" parent="the_game" unique_id=1740376036]
+
+[node name="TextBlock" type="Sprite2D" parent="the_game/dog" unique_id=1483019149]
+position = Vector2(441, 225)
+scale = Vector2(1, 0.99999994)
+texture = ExtResource("4_fc0e3")
+
+[node name="label" type="RichTextLabel" parent="the_game/dog/TextBlock" unique_id=791665444]
+offset_left = -389.0
+offset_top = -38.00002
+offset_right = -349.0
+offset_bottom = 1.9999809
+theme_override_font_sizes/normal_font_size = 50
+text = "Dog upgrade"
+fit_content = true
+autowrap_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="button" type="Button" parent="the_game/dog" unique_id=444973684]
+offset_left = 490.0
+offset_top = 180.0
+offset_right = 820.0
+offset_bottom = 277.0
+theme_override_font_sizes/font_size = 30
+text = "   Buy lvl1"
+alignment = 0
+
+[node name="cost" type="RichTextLabel" parent="the_game/dog/button" unique_id=74538689]
+layout_mode = 0
+offset_left = 164.0
+offset_top = 45.000004
+offset_right = 232.0
+offset_bottom = 73.0
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 20
+text = "cost: 0 "
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Without use" type="Node" parent="." unique_id=615753887]
+
+[node name="munch_pwr" type="RichTextLabel" parent="Without use" unique_id=510939373]
+visible = false
+offset_left = -909.0
+offset_top = -498.0
+offset_right = -647.0
+offset_bottom = -443.0
+theme_override_colors/default_color = Color(0.34901962, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 40
+text = "Munch pwr: 2"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[connection signal="pressed" from="the_game/eat_grass" to="the_game" method="_eat_grass_pressed"]
+[connection signal="pressed" from="the_game/mouth_upgrade/button" to="the_game" method="_mouth_upgrade_pressed"]
+[connection signal="pressed" from="the_game/dog/button" to="the_game" method="_dog_upgrade_pressed"]
