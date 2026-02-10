@@ -18,6 +18,10 @@ zoom = Vector2(0.6, 0.6)
 [node name="Background" type="Sprite2D" parent="the_game" unique_id=2051863108]
 texture = ExtResource("1_e2o6t")
 
+[node name="Timer" type="Timer" parent="the_game" unique_id=2103236156]
+wait_time = 0.1
+autostart = true
+
 [node name="eat_grass" type="Button" parent="the_game" unique_id=1814096244]
 offset_left = -710.0
 offset_top = -248.0
@@ -100,7 +104,7 @@ offset_top = -38.00002
 offset_right = -349.0
 offset_bottom = 1.9999809
 theme_override_font_sizes/normal_font_size = 50
-text = "Dog upgrade"
+text = "Grass eating dog"
 fit_content = true
 autowrap_mode = 0
 metadata/_edit_use_anchors_ = true
@@ -111,7 +115,7 @@ offset_top = 180.0
 offset_right = 820.0
 offset_bottom = 277.0
 theme_override_font_sizes/font_size = 30
-text = "   Buy lvl1"
+text = "   Buy #1"
 alignment = 0
 
 [node name="cost" type="RichTextLabel" parent="the_game/dog/button" unique_id=74538689]
@@ -127,21 +131,42 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="Without use" type="Node" parent="." unique_id=615753887]
+[node name="dog_upgrade" type="Node" parent="the_game" unique_id=1801539624]
 
-[node name="munch_pwr" type="RichTextLabel" parent="Without use" unique_id=510939373]
-visible = false
-offset_left = -909.0
-offset_top = -498.0
-offset_right = -647.0
-offset_bottom = -443.0
-theme_override_colors/default_color = Color(0.34901962, 0, 0, 1)
+[node name="label" type="RichTextLabel" parent="the_game/dog_upgrade" unique_id=2010330250]
+offset_left = 52.0
+offset_top = 325.0
+offset_right = 294.0
+offset_bottom = 380.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/normal_font_size = 40
-text = "Munch pwr: 2"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Button" type="Button" parent="the_game/dog_upgrade" unique_id=1254132564]
+offset_left = 490.0
+offset_top = 325.0
+offset_right = 820.0
+offset_bottom = 411.0
+theme_override_font_sizes/font_size = 30
+text = "   Upgrade"
+alignment = 0
+
+[node name="cost" type="RichTextLabel" parent="the_game/dog_upgrade/Button" unique_id=2078344356]
+layout_mode = 0
+offset_left = 164.0
+offset_top = 45.000004
+offset_right = 232.0
+offset_bottom = 73.0
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 20
+text = "cost: 0 "
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
+[connection signal="timeout" from="the_game/Timer" to="the_game" method="_get_time"]
 [connection signal="pressed" from="the_game/eat_grass" to="the_game" method="_eat_grass_pressed"]
 [connection signal="pressed" from="the_game/mouth_upgrade/button" to="the_game" method="_mouth_upgrade_pressed"]
-[connection signal="pressed" from="the_game/dog/button" to="the_game" method="_dog_upgrade_pressed"]
+[connection signal="pressed" from="the_game/dog/button" to="the_game" method="_dog_buy_pressed"]
+[connection signal="pressed" from="the_game/dog_upgrade/Button" to="the_game" method="_dog_upgrade_pressed"]

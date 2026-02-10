@@ -1,15 +1,12 @@
 #notes
-
 to do next
+ - finish dog
+ - he'll prob need a sprite
+ - add saves (will prob need to learn how to modify files in gdscript)
+
+to do after that
  - add more sounds to grass eating
  - add sounds to upgrades
- 
-to do after that
- - finish dog
- - make him upgradable
- - make next dog much more expensive
- - dog should not be as op
- - he'll prob need a sprite
 
 to do some time in the future
  - create a soundtrack or something
