@@ -11,13 +11,37 @@ var dogs = 0
 var mouth_cost = [5, 5]
 var dog_cost = [10, 10]
 var dog_upgrade_cost = [50, 50]
+#LoadSave
+const save_dir: String = "user://save.json"
+
+var mr_save: Dictionary
+var saving = 0
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	mr_save = _load()
+	if len(mr_save) > 1:
+		grass_eaten = mr_save["grass_eaten"]
+		munch = mr_save["munch"]
+		dog_munch = mr_save["dog_munch"]
+		dogs = mr_save["dogs"]
+		mouth_cost = mr_save["mouth_cost"]
+		dog_cost = mr_save["dog_cost"]
+		dog_upgrade_cost = mr_save["dog_upgrade_cost"]
+		
+	
 	$mouth_upgrade/button/cost.text = "cost: " + _abr(_sum(mouth_cost))
+	$mouth_upgrade/button.text = "   Buy lvl" + _abr(munch)
 	$dog/button/cost.text = "cost: " + _abr(_product(dog_cost))
 	$dog_upgrade/Button/cost.text = "cost: " + _abr(_sum(dog_upgrade_cost))
 	$dog_upgrade/Button.hide()
+	$dog/button.text = "   Buy #" + _abr(dogs + 1)
+	$dog_upgrade/label.text = "Dog munch: " + _abr(dog_munch * dogs)
+	if dogs >= 1:
+		$dog_upgrade/Button.show()
+	$save/saving.visible_characters = saving
+	
 
 
 func _sum(array: Array) -> int:
@@ -120,3 +144,42 @@ func _get_time() -> void:
 	
 	if time == floor(time) and dogs > 0:
 		grass_eaten += dog_munch * dogs
+	
+	if time == int(time) and int(time) % 120 == 0:
+		_save()
+	
+	if saving >= 5:
+		saving += 1
+		if saving > 9:
+			saving = 0
+		$save/saving.visible_characters = saving
+
+
+func _save() -> void:
+	mr_save = {
+	"grass_eaten": grass_eaten,
+	"munch": munch,
+	"dog_munch": dog_munch,
+	"dogs": dogs,
+	"mouth_cost": mouth_cost,
+	"dog_cost": dog_cost,
+	"dog_upgrade_cost": dog_upgrade_cost
+	}
+	
+	var file = FileAccess.open(save_dir, FileAccess.WRITE)
+	file.store_var(mr_save.duplicate())
+	file.close()
+	saving = 5
+	
+	
+
+func _load() -> Dictionary:
+	var save_dict: Dictionary
+	if FileAccess.file_exists(save_dir):
+		var file = FileAccess.open(save_dir, FileAccess.READ)
+		save_dict = file.get_var()
+		file.close()
+	else:
+		save_dict = {}
+
+	return save_dict

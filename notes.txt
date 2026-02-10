@@ -1,8 +1,7 @@
 #notes
 to do next
- - finish dog
- - he'll prob need a sprite
- - add saves (will prob need to learn how to modify files in gdscript)
+ - add chicken
+ - add the click sound to buying
 
 to do after that
  - add more sounds to grass eating
