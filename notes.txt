@@ -1,11 +1,22 @@
 #notes
 to do next
  - add chicken
- - add the click sound to buying
+ - add the click sound to buying (at PC)
+ - make dogs only appear after lvl 5 mouth
+ - make chicken only appear after lvl 5 dogs
+ - make first dog more expensive
 
 to do after that
- - add more sounds to grass eating
- - add sounds to upgrades
+ - add more sounds to grass eating (at PC)
+ - add sounds to upgrades (at PC)
 
 to do some time in the future
- - create a soundtrack or something
+ - create a soundtrack or something (at PC)
+
+
+--chicken concept--
+you just buy chicken
+no upgrade
+they peck grass every 0.2 sec
+munch = 1
+|there could be a special upgrade, where it upgrades their beak for double munch

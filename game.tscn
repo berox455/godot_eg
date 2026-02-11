@@ -55,7 +55,7 @@ stream = ExtResource("4_7jktm")
 [node name="mouth_upgrade" type="Node" parent="the_game" unique_id=893768253]
 
 [node name="TextBlock" type="Sprite2D" parent="the_game/mouth_upgrade" unique_id=922247649]
-position = Vector2(441, -139)
+position = Vector2(441, -240)
 scale = Vector2(1, 0.99999994)
 texture = ExtResource("4_fc0e3")
 
@@ -68,12 +68,13 @@ theme_override_font_sizes/normal_font_size = 50
 text = "Mouth upgrade"
 fit_content = true
 autowrap_mode = 0
+metadata/_edit_use_anchors_ = true
 
 [node name="button" type="Button" parent="the_game/mouth_upgrade" unique_id=1021568349]
 offset_left = 490.0
-offset_top = -184.0
+offset_top = -285.0
 offset_right = 820.0
-offset_bottom = -86.99999
+offset_bottom = -188.0
 theme_override_font_sizes/font_size = 30
 text = "   Buy lvl1"
 alignment = 0
@@ -94,7 +95,7 @@ autowrap_mode = 0
 [node name="dog" type="Node" parent="the_game" unique_id=1740376036]
 
 [node name="TextBlock" type="Sprite2D" parent="the_game/dog" unique_id=1483019149]
-position = Vector2(441, 225)
+position = Vector2(441, -39.000008)
 scale = Vector2(1, 0.99999994)
 texture = ExtResource("4_fc0e3")
 
@@ -111,9 +112,9 @@ metadata/_edit_use_anchors_ = true
 
 [node name="button" type="Button" parent="the_game/dog" unique_id=444973684]
 offset_left = 490.0
-offset_top = 180.0
+offset_top = -84.00001
 offset_right = 820.0
-offset_bottom = 277.0
+offset_bottom = 13.0
 theme_override_font_sizes/font_size = 30
 text = "   Buy #1"
 alignment = 0
@@ -135,9 +136,9 @@ autowrap_mode = 0
 
 [node name="label" type="RichTextLabel" parent="the_game/dog_upgrade" unique_id=2010330250]
 offset_left = 52.0
-offset_top = 325.0
+offset_top = 61.0
 offset_right = 294.0
-offset_bottom = 380.0
+offset_bottom = 116.0
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/normal_font_size = 40
 fit_content = true
@@ -145,14 +146,54 @@ autowrap_mode = 0
 
 [node name="Button" type="Button" parent="the_game/dog_upgrade" unique_id=1254132564]
 offset_left = 490.0
-offset_top = 325.0
+offset_top = 61.0
 offset_right = 820.0
-offset_bottom = 411.0
+offset_bottom = 147.0
 theme_override_font_sizes/font_size = 30
 text = "   Upgrade"
 alignment = 0
 
 [node name="cost" type="RichTextLabel" parent="the_game/dog_upgrade/Button" unique_id=2078344356]
+layout_mode = 0
+offset_left = 164.0
+offset_top = 45.000004
+offset_right = 232.0
+offset_bottom = 73.0
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 20
+text = "cost: 0 "
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="chicken" type="Node" parent="the_game" unique_id=667762880]
+
+[node name="TextBlock" type="Sprite2D" parent="the_game/chicken" unique_id=445632120]
+position = Vector2(441, 247)
+scale = Vector2(1, 0.99999994)
+texture = ExtResource("4_fc0e3")
+
+[node name="label" type="RichTextLabel" parent="the_game/chicken/TextBlock" unique_id=2071592792]
+offset_left = -389.0
+offset_top = -38.00002
+offset_right = -349.0
+offset_bottom = 1.9999809
+theme_override_font_sizes/normal_font_size = 50
+text = "Hungry chicken"
+fit_content = true
+autowrap_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="button" type="Button" parent="the_game/chicken" unique_id=460080043]
+offset_left = 490.0
+offset_top = 202.0
+offset_right = 820.0
+offset_bottom = 299.0
+theme_override_font_sizes/font_size = 30
+text = "   Buy #1"
+alignment = 0
+
+[node name="cost" type="RichTextLabel" parent="the_game/chicken/button" unique_id=1766398019]
 layout_mode = 0
 offset_left = 164.0
 offset_top = 45.000004
@@ -193,4 +234,5 @@ visible_characters = 9
 [connection signal="pressed" from="the_game/mouth_upgrade/button" to="the_game" method="_mouth_upgrade_pressed"]
 [connection signal="pressed" from="the_game/dog/button" to="the_game" method="_dog_buy_pressed"]
 [connection signal="pressed" from="the_game/dog_upgrade/Button" to="the_game" method="_dog_upgrade_pressed"]
+[connection signal="pressed" from="the_game/chicken/button" to="the_game" method="_chicken_buy_pressed"]
 [connection signal="pressed" from="the_game/save/button" to="the_game" method="_save"]
