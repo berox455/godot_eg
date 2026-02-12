@@ -2,9 +2,10 @@ extends Node
 
 var time: float  # in seconds
 var grass_eaten = 0
-const scaling = 1.4
+const scaling = 1.2
 #pwr
-var munch = 1
+var click_munch = 1
+var munch = 0
 var dog_munch = 1
 var chicken_munch = 1
 #lvl
@@ -48,13 +49,12 @@ func _ready() -> void:
 	$chicken/button.text = "   Buy #" + _abr(chicken_lvl + 1)
 	$chicken/button/cost.text = "cost: " + _abr(chicken_cost)
 	
-	if mouth_lvl > 4 or dog_lvl > 0:
-		$dog_upgrade/label.text = "Dog munch: " + _abr(dog_munch * dog_lvl)
-	else:
-		$dog_upgrade/label.hide()
-		$dog_upgrade/Button.hide()
+	if !(mouth_lvl > 4):
 		$dog/TextBlock.hide()
 		$dog/button.hide()
+	else:
+		$dog_upgrade/label.text = "Dog munch: " + _abr(dog_munch * dog_lvl)
+		
 	if !(dog_lvl > 4 or chicken_lvl > 0):
 		$chicken/TextBlock.hide()
 		$chicken/button.hide()
@@ -74,8 +74,10 @@ func _get_time() -> void:
 	time = snapped(time, 0.1)
 	
 	#munching
-	if time == floor(time) and dog_lvl > 0:
-		grass_eaten += dog_munch * dog_lvl
+	if time == floor(time):
+		grass_eaten += munch
+		if dog_lvl > 0:
+			grass_eaten += dog_munch * dog_lvl
 	
 	if chicken_lvl > 0:
 		grass_eaten += chicken_munch * chicken_lvl
@@ -126,6 +128,7 @@ func _abr(number: int) -> String:
 func _save() -> void:
 	mr_save = {
 	"grass_eaten": grass_eaten,
+	"click_much": click_munch,
 	"mouth_lvl": mouth_lvl,
 	"munch": munch,
 	"dog_lvl": dog_lvl,
@@ -155,28 +158,21 @@ func _load() -> Dictionary:
 
 func _unload() -> void:
 	for line in mr_save:
-		var temp = mr_save[line]
+		var saved = mr_save[line]
 		match line:
-			"grass_eaten":
-				grass_eaten = temp
-			"mouth_lvl":
-				mouth_lvl = temp
-			"munch":
-				munch = temp
-			"dog_lvl":
-				dog_lvl = temp
-			"dog_upgrade_lvl":
-				dog_upgrade_lvl = temp
-			"dog_munch":
-				dog_munch = temp
-			"chicken_lvl":
-				chicken_lvl = temp
-			"chicken_munch":
-				chicken_munch = temp
+			"grass_eaten": grass_eaten = saved
+			"click_much": click_munch = saved
+			"mouth_lvl": mouth_lvl = saved
+			"munch": munch = saved
+			"dog_lvl": dog_lvl = saved
+			"dog_upgrade_lvl": dog_upgrade_lvl = saved
+			"dog_munch": dog_munch = saved
+			"chicken_lvl": chicken_lvl = saved
+			"chicken_munch": chicken_munch = saved
 
 
 func _eat_grass_pressed() -> void:
-	grass_eaten += munch
+	grass_eaten += click_munch
 	$eat_grass/Munch.pitch_scale = randf_range(0.9, 1.5)
 	$eat_grass/Munch.play()
 
@@ -185,7 +181,7 @@ func _mouth_upgrade_pressed() -> void:
 	if grass_eaten >= mouth_cost:
 		grass_eaten -= mouth_cost
 		mouth_lvl += 1
-		munch += 1
+		munch += 0.1
 		mouth_cost = mouth_base * (scaling ** mouth_lvl)
 		$mouth_upgrade/button/cost.text = "cost: " + _abr(mouth_cost)
 		$mouth_upgrade/button.text = "   Buy lvl" + _abr(mouth_lvl + 1)
@@ -193,6 +189,8 @@ func _mouth_upgrade_pressed() -> void:
 		if mouth_lvl == 5:
 			$dog/TextBlock.show()
 			$dog/button.show()
+		if mouth_lvl % 25 == 0:
+			click_munch += 1
 
 
 func _dog_buy_pressed() -> void:
@@ -203,12 +201,15 @@ func _dog_buy_pressed() -> void:
 		$dog/button.text = "   Buy #" + _abr(dog_lvl + 1)
 		$dog/button/cost.text = "cost: " + _abr(dog_cost)
 		$dog_upgrade/label.text = "Dog munch: " + _abr(dog_munch * dog_lvl)
-		if dog_lvl == 1:
-			$dog_upgrade/Button.show()
-			$dog_upgrade/label.show()
+		#if dog_lvl == 1:
+		#	$dog_upgrade/Button.show()
+		#	$dog_upgrade/label.show()
+		if dog_lvl == 5:
+			$chicken/TextBlock.show()
+			$chicken/button.show()
 
 
-func _dog_upgrade_pressed() -> void:
+func _dog_upgrade_pressed() -> void:  # deprecated
 	if grass_eaten >= dog_upgrade_cost:
 		grass_eaten -= dog_upgrade_cost
 		dog_upgrade_lvl += 1
@@ -216,9 +217,6 @@ func _dog_upgrade_pressed() -> void:
 		dog_upgrade_cost = dog_upgrade_base * (scaling ** dog_upgrade_lvl)
 		$dog_upgrade/label.text = "Dog munch: " + _abr(dog_munch * dog_lvl)
 		$dog_upgrade/Button/cost.text = "cost: " + _abr(dog_upgrade_cost)
-		if dog_lvl == 5:
-			$chicken/TextBlock.show()
-			$chicken/button.show()
 
 
 func _chicken_buy_pressed() -> void:
@@ -228,3 +226,9 @@ func _chicken_buy_pressed() -> void:
 		chicken_cost = chicken_base * (scaling ** chicken_lvl)
 		$chicken/button.text = "   Buy #" + _abr(chicken_lvl + 1)
 		$chicken/button/cost.text = "cost: " + _abr(chicken_cost)
+
+
+func _erase_save() -> void:
+	var file = FileAccess.open(save_dir, FileAccess.WRITE)
+	file.store_var({})
+	file.close()

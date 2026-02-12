@@ -55,7 +55,7 @@ stream = ExtResource("4_7jktm")
 [node name="mouth_upgrade" type="Node" parent="the_game" unique_id=893768253]
 
 [node name="TextBlock" type="Sprite2D" parent="the_game/mouth_upgrade" unique_id=922247649]
-position = Vector2(441, -240)
+position = Vector2(441, -177)
 scale = Vector2(1, 0.99999994)
 texture = ExtResource("4_fc0e3")
 
@@ -72,9 +72,9 @@ metadata/_edit_use_anchors_ = true
 
 [node name="button" type="Button" parent="the_game/mouth_upgrade" unique_id=1021568349]
 offset_left = 490.0
-offset_top = -285.0
+offset_top = -222.0
 offset_right = 820.0
-offset_bottom = -188.0
+offset_bottom = -125.0
 theme_override_font_sizes/font_size = 30
 text = "   Buy lvl1"
 alignment = 0
@@ -95,7 +95,7 @@ autowrap_mode = 0
 [node name="dog" type="Node" parent="the_game" unique_id=1740376036]
 
 [node name="TextBlock" type="Sprite2D" parent="the_game/dog" unique_id=1483019149]
-position = Vector2(441, -39.000008)
+position = Vector2(441, 22.999992)
 scale = Vector2(1, 0.99999994)
 texture = ExtResource("4_fc0e3")
 
@@ -108,13 +108,12 @@ theme_override_font_sizes/normal_font_size = 50
 text = "Grass eating dog"
 fit_content = true
 autowrap_mode = 0
-metadata/_edit_use_anchors_ = true
 
 [node name="button" type="Button" parent="the_game/dog" unique_id=444973684]
 offset_left = 490.0
-offset_top = -84.00001
+offset_top = -22.000008
 offset_right = 820.0
-offset_bottom = 13.0
+offset_bottom = 75.0
 theme_override_font_sizes/font_size = 30
 text = "   Buy #1"
 alignment = 0
@@ -135,6 +134,7 @@ autowrap_mode = 0
 [node name="dog_upgrade" type="Node" parent="the_game" unique_id=1801539624]
 
 [node name="label" type="RichTextLabel" parent="the_game/dog_upgrade" unique_id=2010330250]
+visible = false
 offset_left = 52.0
 offset_top = 61.0
 offset_right = 294.0
@@ -145,6 +145,7 @@ fit_content = true
 autowrap_mode = 0
 
 [node name="Button" type="Button" parent="the_game/dog_upgrade" unique_id=1254132564]
+visible = false
 offset_left = 490.0
 offset_top = 61.0
 offset_right = 820.0
@@ -169,7 +170,7 @@ autowrap_mode = 0
 [node name="chicken" type="Node" parent="the_game" unique_id=667762880]
 
 [node name="TextBlock" type="Sprite2D" parent="the_game/chicken" unique_id=445632120]
-position = Vector2(441, 247)
+position = Vector2(441, 223)
 scale = Vector2(1, 0.99999994)
 texture = ExtResource("4_fc0e3")
 
@@ -186,9 +187,9 @@ metadata/_edit_use_anchors_ = true
 
 [node name="button" type="Button" parent="the_game/chicken" unique_id=460080043]
 offset_left = 490.0
-offset_top = 202.0
+offset_top = 178.0
 offset_right = 820.0
-offset_bottom = 299.0
+offset_bottom = 275.0
 theme_override_font_sizes/font_size = 30
 text = "   Buy #1"
 alignment = 0
@@ -229,6 +230,14 @@ scroll_active = false
 autowrap_mode = 0
 visible_characters = 9
 
+[node name="erase_save" type="Button" parent="the_game" unique_id=1454136626]
+offset_left = -551.0
+offset_top = -516.0
+offset_right = -330.0
+offset_bottom = -445.0
+theme_override_font_sizes/font_size = 35
+text = "Delete save"
+
 [connection signal="timeout" from="the_game/Timer" to="the_game" method="_get_time"]
 [connection signal="pressed" from="the_game/eat_grass" to="the_game" method="_eat_grass_pressed"]
 [connection signal="pressed" from="the_game/mouth_upgrade/button" to="the_game" method="_mouth_upgrade_pressed"]
@@ -236,3 +245,4 @@ visible_characters = 9
 [connection signal="pressed" from="the_game/dog_upgrade/Button" to="the_game" method="_dog_upgrade_pressed"]
 [connection signal="pressed" from="the_game/chicken/button" to="the_game" method="_chicken_buy_pressed"]
 [connection signal="pressed" from="the_game/save/button" to="the_game" method="_save"]
+[connection signal="pressed" from="the_game/erase_save" to="the_game" method="_erase_save"]
