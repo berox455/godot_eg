@@ -1,6 +1,8 @@
 #notes
 to do next
  - add the click sound to buying (at PC)
+ - add on hover notes
+ - add modifications to each animal
 
 to do after that
  - add more sounds to grass eating (at PC)
@@ -8,3 +10,7 @@ to do after that
 
 to do some time in the future
  - create a soundtrack or something (at PC)
+
+--modifications--
+maybe a mutation or something
+two heads?

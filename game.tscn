@@ -92,6 +92,14 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
+[node name="Label" type="RichTextLabel" parent="the_game/mouth_upgrade/button" unique_id=272862665]
+visible = false
+layout_mode = 0
+offset_top = -42.0
+offset_right = 330.0
+theme_override_font_sizes/normal_font_size = 24
+text = "test"
+
 [node name="dog" type="Node" parent="the_game" unique_id=1740376036]
 
 [node name="TextBlock" type="Sprite2D" parent="the_game/dog" unique_id=1483019149]
@@ -131,41 +139,13 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="dog_upgrade" type="Node" parent="the_game" unique_id=1801539624]
-
-[node name="label" type="RichTextLabel" parent="the_game/dog_upgrade" unique_id=2010330250]
+[node name="Label" type="RichTextLabel" parent="the_game/dog/button" unique_id=662503015]
 visible = false
-offset_left = 52.0
-offset_top = 61.0
-offset_right = 294.0
-offset_bottom = 116.0
-theme_override_colors/default_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/normal_font_size = 40
-fit_content = true
-autowrap_mode = 0
-
-[node name="Button" type="Button" parent="the_game/dog_upgrade" unique_id=1254132564]
-visible = false
-offset_left = 490.0
-offset_top = 61.0
-offset_right = 820.0
-offset_bottom = 147.0
-theme_override_font_sizes/font_size = 30
-text = "   Upgrade"
-alignment = 0
-
-[node name="cost" type="RichTextLabel" parent="the_game/dog_upgrade/Button" unique_id=2078344356]
 layout_mode = 0
-offset_left = 164.0
-offset_top = 45.000004
-offset_right = 232.0
-offset_bottom = 73.0
-mouse_filter = 2
-theme_override_font_sizes/normal_font_size = 20
-text = "cost: 0 "
-fit_content = true
-scroll_active = false
-autowrap_mode = 0
+offset_top = -41.999992
+offset_right = 330.0
+theme_override_font_sizes/normal_font_size = 24
+text = "test"
 
 [node name="chicken" type="Node" parent="the_game" unique_id=667762880]
 
@@ -207,6 +187,14 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
+[node name="Label" type="RichTextLabel" parent="the_game/chicken/button" unique_id=2077841984]
+visible = false
+layout_mode = 0
+offset_top = -42.0
+offset_right = 330.0
+theme_override_font_sizes/normal_font_size = 24
+text = "test"
+
 [node name="save" type="Node" parent="the_game" unique_id=1962212918]
 
 [node name="button" type="Button" parent="the_game/save" unique_id=37624365]
@@ -238,11 +226,25 @@ offset_bottom = -445.0
 theme_override_font_sizes/font_size = 35
 text = "Delete save"
 
+[node name="erase_save" type="Button" parent="the_game/erase_save" unique_id=530368161]
+layout_mode = 0
+offset_left = 334.0
+offset_right = 555.0
+offset_bottom = 71.0
+theme_override_font_sizes/font_size = 35
+text = "Save & Quit"
+
 [connection signal="timeout" from="the_game/Timer" to="the_game" method="_get_time"]
 [connection signal="pressed" from="the_game/eat_grass" to="the_game" method="_eat_grass_pressed"]
+[connection signal="mouse_entered" from="the_game/mouth_upgrade/button" to="the_game" method="_mouth_buy_enter"]
+[connection signal="mouse_exited" from="the_game/mouth_upgrade/button" to="the_game" method="_mouth_buy_exit"]
 [connection signal="pressed" from="the_game/mouth_upgrade/button" to="the_game" method="_mouth_upgrade_pressed"]
+[connection signal="mouse_entered" from="the_game/dog/button" to="the_game" method="_dog_buy_enter"]
+[connection signal="mouse_exited" from="the_game/dog/button" to="the_game" method="_dog_buy_exit"]
 [connection signal="pressed" from="the_game/dog/button" to="the_game" method="_dog_buy_pressed"]
-[connection signal="pressed" from="the_game/dog_upgrade/Button" to="the_game" method="_dog_upgrade_pressed"]
+[connection signal="mouse_entered" from="the_game/chicken/button" to="the_game" method="_chicken_buy_enter"]
+[connection signal="mouse_exited" from="the_game/chicken/button" to="the_game" method="_chicken_buy_exit"]
 [connection signal="pressed" from="the_game/chicken/button" to="the_game" method="_chicken_buy_pressed"]
 [connection signal="pressed" from="the_game/save/button" to="the_game" method="_save"]
 [connection signal="pressed" from="the_game/erase_save" to="the_game" method="_erase_save"]
+[connection signal="pressed" from="the_game/erase_save/erase_save" to="the_game" method="_save_quit"]

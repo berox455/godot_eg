@@ -41,19 +41,13 @@ func _ready() -> void:
 	dog_upgrade_cost = dog_upgrade_base * (scaling ** dog_upgrade_lvl)
 	chicken_cost = chicken_base * (scaling ** chicken_lvl)
 	
-	$mouth_upgrade/button.text = "   Buy lvl" + _abr(mouth_lvl + 1)
-	$mouth_upgrade/button/cost.text = "cost: " + _abr(mouth_cost)
-	$dog/button.text = "   Buy #" + _abr(dog_lvl + 1)
-	$dog/button/cost.text = "cost: " + _abr(dog_cost)
-	$dog_upgrade/Button/cost.text = "cost: " + _abr(dog_upgrade_cost)
-	$chicken/button.text = "   Buy #" + _abr(chicken_lvl + 1)
-	$chicken/button/cost.text = "cost: " + _abr(chicken_cost)
+	_mouth_label_update()
+	_dog_label_update()
+	_chicken_label_update()
 	
 	if !(mouth_lvl > 4):
 		$dog/TextBlock.hide()
 		$dog/button.hide()
-	else:
-		$dog_upgrade/label.text = "Dog munch: " + _abr(dog_munch * dog_lvl)
 		
 	if !(dog_lvl > 4 or chicken_lvl > 0):
 		$chicken/TextBlock.hide()
@@ -183,8 +177,7 @@ func _mouth_upgrade_pressed() -> void:
 		mouth_lvl += 1
 		munch += 0.1
 		mouth_cost = mouth_base * (scaling ** mouth_lvl)
-		$mouth_upgrade/button/cost.text = "cost: " + _abr(mouth_cost)
-		$mouth_upgrade/button.text = "   Buy lvl" + _abr(mouth_lvl + 1)
+		_mouth_label_update()
 		
 		if mouth_lvl == 5:
 			$dog/TextBlock.show()
@@ -198,25 +191,11 @@ func _dog_buy_pressed() -> void:
 		grass_eaten -= dog_cost
 		dog_lvl += 1
 		dog_cost = dog_base * (scaling ** dog_lvl)
-		$dog/button.text = "   Buy #" + _abr(dog_lvl + 1)
-		$dog/button/cost.text = "cost: " + _abr(dog_cost)
-		$dog_upgrade/label.text = "Dog munch: " + _abr(dog_munch * dog_lvl)
-		#if dog_lvl == 1:
-		#	$dog_upgrade/Button.show()
-		#	$dog_upgrade/label.show()
+		_dog_label_update()
+		
 		if dog_lvl == 5:
 			$chicken/TextBlock.show()
 			$chicken/button.show()
-
-
-func _dog_upgrade_pressed() -> void:  # deprecated
-	if grass_eaten >= dog_upgrade_cost:
-		grass_eaten -= dog_upgrade_cost
-		dog_upgrade_lvl += 1
-		dog_munch += 1
-		dog_upgrade_cost = dog_upgrade_base * (scaling ** dog_upgrade_lvl)
-		$dog_upgrade/label.text = "Dog munch: " + _abr(dog_munch * dog_lvl)
-		$dog_upgrade/Button/cost.text = "cost: " + _abr(dog_upgrade_cost)
 
 
 func _chicken_buy_pressed() -> void:
@@ -224,11 +203,58 @@ func _chicken_buy_pressed() -> void:
 		grass_eaten -= chicken_cost
 		chicken_lvl += 1
 		chicken_cost = chicken_base * (scaling ** chicken_lvl)
-		$chicken/button.text = "   Buy #" + _abr(chicken_lvl + 1)
-		$chicken/button/cost.text = "cost: " + _abr(chicken_cost)
+		_chicken_label_update()
 
 
 func _erase_save() -> void:
 	var file = FileAccess.open(save_dir, FileAccess.WRITE)
 	file.store_var({})
 	file.close()
+
+
+func _save_quit() -> void:
+	_save()
+	get_tree().quit()
+
+
+func _mouth_buy_enter() -> void:
+	$mouth_upgrade/button/Label.show()
+
+
+func _mouth_buy_exit() -> void:
+	$mouth_upgrade/button/Label.hide()
+
+
+func _dog_buy_enter() -> void:
+	$dog/button/Label.show()
+
+
+func _dog_buy_exit() -> void:
+	$dog/button/Label.hide()
+
+
+func _chicken_buy_enter() -> void:
+	$chicken/button/Label.show()
+
+
+func _chicken_buy_exit() -> void:
+	$chicken/button/Label.hide()
+	
+
+func _mouth_label_update() -> void:
+	$mouth_upgrade/button.text = "   Buy lvl" + _abr(mouth_lvl + 1)
+	$mouth_upgrade/button/cost.text = "cost: " + _abr(mouth_cost)
+	$mouth_upgrade/button/Label.text = "Munch/s: " + str(munch)
+	
+	
+func _dog_label_update() -> void:
+	$dog/button.text = "   Buy lvl" + _abr(dog_lvl + 1)
+	$dog/button/cost.text = "cost: " + _abr(dog_cost)
+	$dog/button/Label.text = "Munch/s: " + str(dog_munch * dog_lvl)
+	
+
+func _chicken_label_update() -> void:
+	$chicken/button.text = "   Buy lvl" + _abr(chicken_lvl + 1)
+	$chicken/button/cost.text = "cost: " + _abr(chicken_cost)
+	$chicken/button/Label.text = "Munch/s: " + str(chicken_munch * 10 * chicken_lvl)
+	
