@@ -28,6 +28,8 @@ const save_dir: String = "user://save.json"
 
 var mr_save: Dictionary
 var saving = 0
+#other
+var munching: int = 0
 
 
 # Called when the node enters the scene tree for the first time.
@@ -85,6 +87,11 @@ func _get_time() -> void:
 		if saving > 9:
 			saving = 0
 		$save/saving.visible_characters = saving
+	
+	if munching > 0:
+		munching -= 1
+	else:
+		$eat_grass/Grass.show()
 
 
 func _abr(number: int) -> String:
@@ -169,6 +176,8 @@ func _eat_grass_pressed() -> void:
 	grass_eaten += click_munch
 	$eat_grass/Munch.pitch_scale = randf_range(0.9, 1.5)
 	$eat_grass/Munch.play()
+	$eat_grass/Grass.hide()
+	munching = 2
 
 
 func _mouth_upgrade_pressed() -> void:
@@ -257,4 +266,5 @@ func _chicken_label_update() -> void:
 	$chicken/button.text = "   Buy lvl" + _abr(chicken_lvl + 1)
 	$chicken/button/cost.text = "cost: " + _abr(chicken_cost)
 	$chicken/button/Label.text = "Munch/s: " + str(chicken_munch * 10 * chicken_lvl)
+	
 	
