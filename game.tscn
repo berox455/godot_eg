@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://dek18fenvx1ri" path="res://munch.mp3" id="4_7jktm"]
 [ext_resource type="Texture2D" uid="uid://bchknnx4h5v38" path="res://textbox.png" id="4_fc0e3"]
 [ext_resource type="Texture2D" uid="uid://bqxyc6caontto" path="res://grass_munched-transparent.png" id="5_ryrav"]
+[ext_resource type="AudioStream" uid="uid://cq7o5i1tmscar" path="res://click.mp3" id="7_eow3j"]
 
 [node name="Node2D" type="Node2D" unique_id=1262863614]
 
@@ -254,11 +255,15 @@ offset_bottom = 71.0
 theme_override_font_sizes/font_size = 35
 text = "Save & Quit"
 
+[node name="Click" type="AudioStreamPlayer2D" parent="the_game" unique_id=970457337]
+stream = ExtResource("7_eow3j")
+volume_db = 2.0
+
 [connection signal="timeout" from="the_game/Timer" to="the_game" method="_get_time"]
 [connection signal="pressed" from="the_game/eat_grass" to="the_game" method="_eat_grass_pressed"]
 [connection signal="mouse_entered" from="the_game/mouth/button" to="the_game" method="_mouth_buy_enter"]
 [connection signal="mouse_exited" from="the_game/mouth/button" to="the_game" method="_mouth_buy_exit"]
-[connection signal="pressed" from="the_game/mouth/button" to="the_game" method="_mouth_upgrade_pressed"]
+[connection signal="pressed" from="the_game/mouth/button" to="the_game" method="_mouth_pressed"]
 [connection signal="mouse_entered" from="the_game/dog/button" to="the_game" method="_dog_buy_enter"]
 [connection signal="mouse_exited" from="the_game/dog/button" to="the_game" method="_dog_buy_exit"]
 [connection signal="pressed" from="the_game/dog/button" to="the_game" method="_dog_buy_pressed"]

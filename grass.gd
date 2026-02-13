@@ -127,6 +127,7 @@ func _abr(number: int) -> String:
 
 
 func _save() -> void:
+	_click_play()
 	mr_save = {
 	"grass_eaten": grass_eaten,
 	"click_much": click_munch,
@@ -182,6 +183,7 @@ func _eat_grass_pressed() -> void:
 
 func _mouth_pressed() -> void:
 	if grass_eaten >= mouth_cost:
+		_click_play()
 		grass_eaten -= mouth_cost
 		mouth_lvl += 1
 		munch += 0.1
@@ -197,6 +199,7 @@ func _mouth_pressed() -> void:
 
 func _dog_buy_pressed() -> void:
 	if grass_eaten >= dog_cost:
+		_click_play()
 		grass_eaten -= dog_cost
 		dog_lvl += 1
 		dog_cost = dog_base * (scaling ** dog_lvl)
@@ -209,6 +212,7 @@ func _dog_buy_pressed() -> void:
 
 func _chicken_buy_pressed() -> void:
 	if grass_eaten >= chicken_cost:
+		_click_play()
 		grass_eaten -= chicken_cost
 		chicken_lvl += 1
 		chicken_cost = chicken_base * (scaling ** chicken_lvl)
@@ -216,12 +220,14 @@ func _chicken_buy_pressed() -> void:
 
 
 func _erase_save() -> void:
+	_click_play()
 	var file = FileAccess.open(save_dir, FileAccess.WRITE)
 	file.store_var({})
 	file.close()
 
 
 func _save_quit() -> void:
+	_click_play()
 	_save()
 	get_tree().quit()
 
@@ -253,7 +259,7 @@ func _chicken_buy_exit() -> void:
 func _mouth_label_update() -> void:
 	$mouth/button.text = "   Buy lvl" + _abr(mouth_lvl + 1)
 	$mouth/button/cost.text = "cost: " + _abr(mouth_cost)
-	$mouth/button/Label.text = "Munch/s: " + str(munch)
+	$mouth/button/Label.text = str(munch) + " grass/s"
 	$mouth/button/Label.text += """
 Each mouth can bite off 0.1 grass/s
 They're geneticaly engineered for munchin' on grass. -Munch Man
@@ -263,14 +269,17 @@ They're geneticaly engineered for munchin' on grass. -Munch Man
 func _dog_label_update() -> void:
 	$dog/button.text = "   Buy lvl" + _abr(dog_lvl + 1)
 	$dog/button/cost.text = "cost: " + _abr(dog_cost)
-	$dog/button/Label.text = "Munch/s: " + str(dog_munch * dog_lvl) + "\n"
+	$dog/button/Label.text = str(dog_munch * dog_lvl) + " grass/s"
 	$dog/button/Label.text += ""
 	
 
 func _chicken_label_update() -> void:
 	$chicken/button.text = "   Buy lvl" + _abr(chicken_lvl + 1)
 	$chicken/button/cost.text = "cost: " + _abr(chicken_cost)
-	$chicken/button/Label.text = "Munch/s: " + str(chicken_munch * 10 * chicken_lvl) + "\n"
+	$chicken/button/Label.text = str(chicken_munch * 10 * chicken_lvl)+ " grass/s"
 	$dog/button/Label.text += ""
 	
-	
+
+func _click_play() -> void:
+	$Click.pitch_scale = randf_range(0.9, 1.5)
+	$Click.play()
