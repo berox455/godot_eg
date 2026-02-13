@@ -57,14 +57,14 @@ stream = ExtResource("4_7jktm")
 position = Vector2(288, 272)
 texture = ExtResource("5_ryrav")
 
-[node name="mouth_upgrade" type="Node" parent="the_game" unique_id=893768253]
+[node name="mouth" type="Node" parent="the_game" unique_id=893768253]
 
-[node name="TextBlock" type="Sprite2D" parent="the_game/mouth_upgrade" unique_id=922247649]
+[node name="TextBlock" type="Sprite2D" parent="the_game/mouth" unique_id=922247649]
 position = Vector2(441, -177)
 scale = Vector2(1, 0.99999994)
 texture = ExtResource("4_fc0e3")
 
-[node name="label" type="RichTextLabel" parent="the_game/mouth_upgrade/TextBlock" unique_id=2096098550]
+[node name="label" type="RichTextLabel" parent="the_game/mouth/TextBlock" unique_id=2096098550]
 offset_left = -389.0
 offset_top = -38.00002
 offset_right = -349.0
@@ -75,7 +75,7 @@ fit_content = true
 autowrap_mode = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="button" type="Button" parent="the_game/mouth_upgrade" unique_id=1021568349]
+[node name="button" type="Button" parent="the_game/mouth" unique_id=1021568349]
 offset_left = 490.0
 offset_top = -222.0
 offset_right = 820.0
@@ -84,7 +84,7 @@ theme_override_font_sizes/font_size = 30
 text = "   Buy lvl1"
 alignment = 0
 
-[node name="cost" type="RichTextLabel" parent="the_game/mouth_upgrade/button" unique_id=1172528957]
+[node name="cost" type="RichTextLabel" parent="the_game/mouth/button" unique_id=1172528957]
 layout_mode = 0
 offset_left = 164.0
 offset_top = 45.000004
@@ -97,13 +97,18 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="Label" type="RichTextLabel" parent="the_game/mouth_upgrade/button" unique_id=272862665]
+[node name="Label" type="RichTextLabel" parent="the_game/mouth/button" unique_id=272862665]
 visible = false
+z_index = 2
 layout_mode = 0
-offset_top = -42.0
-offset_right = 330.0
+offset_left = -72.0
+offset_top = 97.0
+offset_right = 406.0
+offset_bottom = 157.83636
 theme_override_font_sizes/normal_font_size = 24
 text = "test"
+fit_content = true
+scroll_active = false
 
 [node name="dog" type="Node" parent="the_game" unique_id=1740376036]
 
@@ -146,11 +151,16 @@ autowrap_mode = 0
 
 [node name="Label" type="RichTextLabel" parent="the_game/dog/button" unique_id=662503015]
 visible = false
+z_index = 2
 layout_mode = 0
-offset_top = -41.999992
-offset_right = 330.0
+offset_left = -72.0
+offset_top = 97.00001
+offset_right = 406.0
+offset_bottom = 157.83636
 theme_override_font_sizes/normal_font_size = 24
 text = "test"
+fit_content = true
+scroll_active = false
 
 [node name="chicken" type="Node" parent="the_game" unique_id=667762880]
 
@@ -194,11 +204,16 @@ autowrap_mode = 0
 
 [node name="Label" type="RichTextLabel" parent="the_game/chicken/button" unique_id=2077841984]
 visible = false
+z_index = 2
 layout_mode = 0
-offset_top = -42.0
-offset_right = 330.0
+offset_left = -72.0
+offset_top = 97.0
+offset_right = 406.0
+offset_bottom = 157.83636
 theme_override_font_sizes/normal_font_size = 24
 text = "test"
+fit_content = true
+scroll_active = false
 
 [node name="save" type="Node" parent="the_game" unique_id=1962212918]
 
@@ -241,9 +256,9 @@ text = "Save & Quit"
 
 [connection signal="timeout" from="the_game/Timer" to="the_game" method="_get_time"]
 [connection signal="pressed" from="the_game/eat_grass" to="the_game" method="_eat_grass_pressed"]
-[connection signal="mouse_entered" from="the_game/mouth_upgrade/button" to="the_game" method="_mouth_buy_enter"]
-[connection signal="mouse_exited" from="the_game/mouth_upgrade/button" to="the_game" method="_mouth_buy_exit"]
-[connection signal="pressed" from="the_game/mouth_upgrade/button" to="the_game" method="_mouth_upgrade_pressed"]
+[connection signal="mouse_entered" from="the_game/mouth/button" to="the_game" method="_mouth_buy_enter"]
+[connection signal="mouse_exited" from="the_game/mouth/button" to="the_game" method="_mouth_buy_exit"]
+[connection signal="pressed" from="the_game/mouth/button" to="the_game" method="_mouth_upgrade_pressed"]
 [connection signal="mouse_entered" from="the_game/dog/button" to="the_game" method="_dog_buy_enter"]
 [connection signal="mouse_exited" from="the_game/dog/button" to="the_game" method="_dog_buy_exit"]
 [connection signal="pressed" from="the_game/dog/button" to="the_game" method="_dog_buy_pressed"]

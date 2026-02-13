@@ -180,7 +180,7 @@ func _eat_grass_pressed() -> void:
 	munching = 2
 
 
-func _mouth_upgrade_pressed() -> void:
+func _mouth_pressed() -> void:
 	if grass_eaten >= mouth_cost:
 		grass_eaten -= mouth_cost
 		mouth_lvl += 1
@@ -227,11 +227,11 @@ func _save_quit() -> void:
 
 
 func _mouth_buy_enter() -> void:
-	$mouth_upgrade/button/Label.show()
+	$mouth/button/Label.show()
 
 
 func _mouth_buy_exit() -> void:
-	$mouth_upgrade/button/Label.hide()
+	$mouth/button/Label.hide()
 
 
 func _dog_buy_enter() -> void:
@@ -251,20 +251,26 @@ func _chicken_buy_exit() -> void:
 	
 
 func _mouth_label_update() -> void:
-	$mouth_upgrade/button.text = "   Buy lvl" + _abr(mouth_lvl + 1)
-	$mouth_upgrade/button/cost.text = "cost: " + _abr(mouth_cost)
-	$mouth_upgrade/button/Label.text = "Munch/s: " + str(munch)
+	$mouth/button.text = "   Buy lvl" + _abr(mouth_lvl + 1)
+	$mouth/button/cost.text = "cost: " + _abr(mouth_cost)
+	$mouth/button/Label.text = "Munch/s: " + str(munch)
+	$mouth/button/Label.text += """
+Each mouth can bite off 0.1 grass/s
+They're geneticaly engineered for munchin' on grass. -Munch Man
+"""
 	
 	
 func _dog_label_update() -> void:
 	$dog/button.text = "   Buy lvl" + _abr(dog_lvl + 1)
 	$dog/button/cost.text = "cost: " + _abr(dog_cost)
-	$dog/button/Label.text = "Munch/s: " + str(dog_munch * dog_lvl)
+	$dog/button/Label.text = "Munch/s: " + str(dog_munch * dog_lvl) + "\n"
+	$dog/button/Label.text += ""
 	
 
 func _chicken_label_update() -> void:
 	$chicken/button.text = "   Buy lvl" + _abr(chicken_lvl + 1)
 	$chicken/button/cost.text = "cost: " + _abr(chicken_cost)
-	$chicken/button/Label.text = "Munch/s: " + str(chicken_munch * 10 * chicken_lvl)
+	$chicken/button/Label.text = "Munch/s: " + str(chicken_munch * 10 * chicken_lvl) + "\n"
+	$dog/button/Label.text += ""
 	
 	

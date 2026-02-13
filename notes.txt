@@ -2,6 +2,7 @@
 to do next
  - add the click sound to buying (at PC)
  - add on hover notes (make them better)
+	- they def need a background or something
  - add modifications to each animal
  - add click_munch numbers, which show after click, something like cookie clicker
 
