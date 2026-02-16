@@ -7,6 +7,28 @@
 [ext_resource type="Texture2D" uid="uid://bchknnx4h5v38" path="res://textbox.png" id="4_fc0e3"]
 [ext_resource type="Texture2D" uid="uid://bqxyc6caontto" path="res://grass_munched-transparent.png" id="5_ryrav"]
 [ext_resource type="AudioStream" uid="uid://cq7o5i1tmscar" path="res://click.mp3" id="7_eow3j"]
+[ext_resource type="StyleBox" uid="uid://e018a5trpufy" path="res://note_label.tres" id="7_j5wjh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eow3j"]
+bg_color = Color(0.3529412, 0.3529412, 0.3529412, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j5wjh"]
+bg_color = Color(0.29808798, 0.29808798, 0.29808798, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vef74"]
+bg_color = Color(0.29808798, 0.29808798, 0.29808798, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
 
 [node name="Node2D" type="Node2D" unique_id=1262863614]
 
@@ -31,6 +53,9 @@ offset_left = -710.0
 offset_top = -248.0
 offset_right = -137.0
 offset_bottom = 325.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_eow3j")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_j5wjh")
+theme_override_styles/hover = SubResource("StyleBoxFlat_vef74")
 icon_alignment = 1
 vertical_icon_alignment = 2
 
@@ -52,6 +77,7 @@ horizontal_alignment = 1
 
 [node name="Grass" type="Sprite2D" parent="the_game/eat_grass" unique_id=2142833719]
 texture_filter = 2
+texture_repeat = 1
 position = Vector2(288, 272)
 texture = ExtResource("2_feb5d")
 
@@ -112,6 +138,7 @@ offset_right = 406.0
 offset_bottom = 157.83636
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/normal_font_size = 24
+theme_override_styles/normal = ExtResource("7_j5wjh")
 text = "test"
 fit_content = true
 scroll_active = false
@@ -164,6 +191,7 @@ offset_top = 97.00001
 offset_right = 406.0
 offset_bottom = 157.83636
 theme_override_font_sizes/normal_font_size = 24
+theme_override_styles/normal = ExtResource("7_j5wjh")
 text = "test"
 fit_content = true
 scroll_active = false
@@ -217,6 +245,7 @@ offset_top = 97.0
 offset_right = 406.0
 offset_bottom = 157.83636
 theme_override_font_sizes/normal_font_size = 24
+theme_override_styles/normal = ExtResource("7_j5wjh")
 text = "test"
 fit_content = true
 scroll_active = false
