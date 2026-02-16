@@ -30,6 +30,7 @@ var mr_save: Dictionary
 var saving = 0
 #other
 var munching: int = 0
+var num_velocity: int = 1.5
 
 
 # Called when the node enters the scene tree for the first time.
@@ -63,6 +64,11 @@ func _process(delta: float) -> void:
 		$eat_grass/grass_eaten.text = _abr(grass_eaten)
 	else:
 		$eat_grass/grass_eaten.text = "grass eaten: " + _abr(grass_eaten)
+		
+	var children = $Click_numbers.get_children()
+	for node in children:
+		var temp = node.get_position()
+		node.set_position(Vector2(temp.x, temp.y - num_velocity))
 
 
 func _get_time() -> void:
@@ -92,7 +98,20 @@ func _get_time() -> void:
 		munching -= 1
 	else:
 		$eat_grass/Grass.show()
-
+	
+	var children = $Click_numbers.get_children()
+	var i = 0
+	for node in children:
+		var col = node.get_theme_color("font_color")
+		if col.a == 0:
+			node.queue_free()
+		elif col.a > 0.9:
+			col.a -= 0.01
+			node.add_theme_color_override("font_color", col)
+		else:
+			col.a -= 0.1
+			node.add_theme_color_override("font_color", col)
+		i += 1
 
 func _abr(number: int) -> String:
 	var k: float = 1000
@@ -175,6 +194,7 @@ func _unload() -> void:
 
 func _eat_grass_pressed() -> void:
 	grass_eaten += click_munch
+	_spawn_number()
 	$eat_grass/Munch.pitch_scale = randf_range(0.9, 1.5)
 	$eat_grass/Munch.play()
 	$eat_grass/Grass.hide()
@@ -257,12 +277,18 @@ func _chicken_buy_exit() -> void:
 	
 
 func _mouth_label_update() -> void:
+	var mouth_desc = """
+Each mouth can bite off 0.1 grass/s
+"They're geneticaly engineered for munchin' on grass." -Munch Man
+"""
 	$mouth/button.text = "   Buy lvl" + _abr(mouth_lvl + 1)
 	$mouth/button/cost.text = "cost: " + _abr(mouth_cost)
-	$mouth/button/Label.text = str(munch) + " grass/s"
-	$mouth/button/Label.text += """
-Each mouth can bite off 0.1 grass/s
-They're geneticaly engineered for munchin' on grass. -Munch Man
+	if mouth_lvl > 0:
+		$mouth/button/Label.text = str(munch) + " grass/s"
+		$mouth/button/Label.text += mouth_desc
+	else:
+		$mouth/button/Label.text = """
+"They're geneticaly engineered for munchin' on grass." -Munch Man
 """
 	
 	
@@ -283,3 +309,15 @@ func _chicken_label_update() -> void:
 func _click_play() -> void:
 	$Click.pitch_scale = randf_range(0.9, 1.5)
 	$Click.play()
+	
+
+func _spawn_number() -> void:
+	var mp = $eat_grass.get_global_mouse_position()
+	var new_label = Label.new()
+	$Click_numbers.add_child(new_label, true)
+	
+	new_label.set_position(mp)
+	new_label.text = str(click_munch)
+	new_label.add_theme_font_size_override("font_size", 30)
+	new_label.z_index = 3
+	
