@@ -1,0 +1,280 @@
+[gd_scene format=3 uid="uid://bqdenshjsp4ww"]
+
+[ext_resource type="Texture2D" uid="uid://cfqpw80tfd7ge" path="res://background.png" id="1_e2o6t"]
+[ext_resource type="Script" uid="uid://dqlrbspn8wliv" path="res://grass.gd" id="1_feb5d"]
+[ext_resource type="Texture2D" uid="uid://dam2p0odckeyf" path="res://grass-transparent.png" id="2_feb5d"]
+[ext_resource type="AudioStream" uid="uid://dek18fenvx1ri" path="res://munch.mp3" id="4_7jktm"]
+[ext_resource type="Texture2D" uid="uid://bchknnx4h5v38" path="res://textbox.png" id="4_fc0e3"]
+[ext_resource type="Texture2D" uid="uid://bqxyc6caontto" path="res://grass_munched-transparent.png" id="5_ryrav"]
+[ext_resource type="AudioStream" uid="uid://cq7o5i1tmscar" path="res://click.mp3" id="7_eow3j"]
+
+[node name="Node2D" type="Node2D" unique_id=1262863614]
+
+[node name="the_game" type="Node" parent="." unique_id=1269241689]
+script = ExtResource("1_feb5d")
+
+[node name="Camera2D" type="Camera2D" parent="the_game" unique_id=784535214]
+scale = Vector2(1, 0.9853383)
+zoom = Vector2(0.6, 0.6)
+
+[node name="Background" type="Sprite2D" parent="the_game" unique_id=2051863108]
+texture = ExtResource("1_e2o6t")
+
+[node name="Timer" type="Timer" parent="the_game" unique_id=2103236156]
+wait_time = 0.1
+autostart = true
+
+[node name="Click_numbers" type="Node" parent="the_game" unique_id=2104022061]
+
+[node name="eat_grass" type="Button" parent="the_game" unique_id=1814096244]
+offset_left = -710.0
+offset_top = -248.0
+offset_right = -137.0
+offset_bottom = 325.0
+icon_alignment = 1
+vertical_icon_alignment = 2
+
+[node name="grass_eaten" type="RichTextLabel" parent="the_game/eat_grass" unique_id=450870177]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 37.0
+offset_right = 462.0
+offset_bottom = 106.0
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.28627452, 0.72156864, 0.4627451, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_font_sizes/normal_font_size = 50
+text = "grass eaten: 0"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+
+[node name="Grass" type="Sprite2D" parent="the_game/eat_grass" unique_id=2142833719]
+texture_filter = 2
+position = Vector2(288, 272)
+texture = ExtResource("2_feb5d")
+
+[node name="Munch" type="AudioStreamPlayer2D" parent="the_game/eat_grass" unique_id=41292201]
+stream = ExtResource("4_7jktm")
+
+[node name="GrassMunched" type="Sprite2D" parent="the_game/eat_grass" unique_id=1999216705]
+position = Vector2(288, 272)
+texture = ExtResource("5_ryrav")
+
+[node name="mouth" type="Node" parent="the_game" unique_id=893768253]
+
+[node name="TextBlock" type="Sprite2D" parent="the_game/mouth" unique_id=922247649]
+position = Vector2(441, -177)
+scale = Vector2(1, 0.99999994)
+texture = ExtResource("4_fc0e3")
+
+[node name="label" type="RichTextLabel" parent="the_game/mouth/TextBlock" unique_id=2096098550]
+offset_left = -389.0
+offset_top = -38.00002
+offset_right = -349.0
+offset_bottom = 1.9999809
+theme_override_font_sizes/normal_font_size = 50
+text = "Mouth upgrade"
+fit_content = true
+autowrap_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="button" type="Button" parent="the_game/mouth" unique_id=1021568349]
+offset_left = 490.0
+offset_top = -222.0
+offset_right = 820.0
+offset_bottom = -125.0
+theme_override_font_sizes/font_size = 30
+text = "   Buy lvl1"
+alignment = 0
+
+[node name="cost" type="RichTextLabel" parent="the_game/mouth/button" unique_id=1172528957]
+layout_mode = 0
+offset_left = 164.0
+offset_top = 45.000004
+offset_right = 232.0
+offset_bottom = 73.0
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 20
+text = "cost: 0 "
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Label" type="RichTextLabel" parent="the_game/mouth/button" unique_id=272862665]
+visible = false
+z_index = 2
+layout_mode = 0
+offset_left = -72.0
+offset_top = 97.0
+offset_right = 406.0
+offset_bottom = 157.83636
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/normal_font_size = 24
+text = "test"
+fit_content = true
+scroll_active = false
+
+[node name="dog" type="Node" parent="the_game" unique_id=1740376036]
+
+[node name="TextBlock" type="Sprite2D" parent="the_game/dog" unique_id=1483019149]
+position = Vector2(441, 22.999992)
+scale = Vector2(1, 0.99999994)
+texture = ExtResource("4_fc0e3")
+
+[node name="label" type="RichTextLabel" parent="the_game/dog/TextBlock" unique_id=791665444]
+offset_left = -389.0
+offset_top = -38.00002
+offset_right = -349.0
+offset_bottom = 1.9999809
+theme_override_font_sizes/normal_font_size = 50
+text = "Grass eating dog"
+fit_content = true
+autowrap_mode = 0
+
+[node name="button" type="Button" parent="the_game/dog" unique_id=444973684]
+offset_left = 490.0
+offset_top = -22.000008
+offset_right = 820.0
+offset_bottom = 75.0
+theme_override_font_sizes/font_size = 30
+text = "   Buy lvl1"
+alignment = 0
+
+[node name="cost" type="RichTextLabel" parent="the_game/dog/button" unique_id=74538689]
+layout_mode = 0
+offset_left = 164.0
+offset_top = 45.000004
+offset_right = 232.0
+offset_bottom = 73.0
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 20
+text = "cost: 0 "
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Label" type="RichTextLabel" parent="the_game/dog/button" unique_id=662503015]
+visible = false
+z_index = 2
+layout_mode = 0
+offset_left = -72.0
+offset_top = 97.00001
+offset_right = 406.0
+offset_bottom = 157.83636
+theme_override_font_sizes/normal_font_size = 24
+text = "test"
+fit_content = true
+scroll_active = false
+
+[node name="chicken" type="Node" parent="the_game" unique_id=667762880]
+
+[node name="TextBlock" type="Sprite2D" parent="the_game/chicken" unique_id=445632120]
+position = Vector2(441, 223)
+scale = Vector2(1, 0.99999994)
+texture = ExtResource("4_fc0e3")
+
+[node name="label" type="RichTextLabel" parent="the_game/chicken/TextBlock" unique_id=2071592792]
+offset_left = -389.0
+offset_top = -38.00002
+offset_right = -349.0
+offset_bottom = 1.9999809
+theme_override_font_sizes/normal_font_size = 50
+text = "Hungry chicken"
+fit_content = true
+autowrap_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="button" type="Button" parent="the_game/chicken" unique_id=460080043]
+offset_left = 490.0
+offset_top = 178.0
+offset_right = 820.0
+offset_bottom = 275.0
+theme_override_font_sizes/font_size = 30
+text = "   Buy lvl1"
+alignment = 0
+
+[node name="cost" type="RichTextLabel" parent="the_game/chicken/button" unique_id=1766398019]
+layout_mode = 0
+offset_left = 164.0
+offset_top = 45.000004
+offset_right = 232.0
+offset_bottom = 73.0
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 20
+text = "cost: 0 "
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Label" type="RichTextLabel" parent="the_game/chicken/button" unique_id=2077841984]
+visible = false
+z_index = 2
+layout_mode = 0
+offset_left = -72.0
+offset_top = 97.0
+offset_right = 406.0
+offset_bottom = 157.83636
+theme_override_font_sizes/normal_font_size = 24
+text = "test"
+fit_content = true
+scroll_active = false
+
+[node name="save" type="Node" parent="the_game" unique_id=1962212918]
+
+[node name="button" type="Button" parent="the_game/save" unique_id=37624365]
+offset_left = -936.0
+offset_top = -516.0
+offset_right = -680.0
+offset_bottom = -388.0
+theme_override_font_sizes/font_size = 55
+text = "Save"
+
+[node name="saving" type="RichTextLabel" parent="the_game/save" unique_id=361822261]
+offset_left = 654.0
+offset_top = -516.0
+offset_right = 871.0
+offset_bottom = -440.0
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 55
+text = "Saving..."
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+visible_characters = 9
+
+[node name="erase_save" type="Button" parent="the_game" unique_id=1454136626]
+offset_left = -551.0
+offset_top = -516.0
+offset_right = -330.0
+offset_bottom = -445.0
+theme_override_font_sizes/font_size = 35
+text = "Delete save"
+
+[node name="erase_save" type="Button" parent="the_game/erase_save" unique_id=530368161]
+layout_mode = 0
+offset_left = 334.0
+offset_right = 555.0
+offset_bottom = 71.0
+theme_override_font_sizes/font_size = 35
+text = "Save & Quit"
+
+[node name="Click" type="AudioStreamPlayer2D" parent="the_game" unique_id=970457337]
+stream = ExtResource("7_eow3j")
+volume_db = 2.0
+
+[connection signal="timeout" from="the_game/Timer" to="the_game" method="_get_time"]
+[connection signal="pressed" from="the_game/eat_grass" to="the_game" method="_eat_grass_pressed"]
+[connection signal="mouse_entered" from="the_game/mouth/button" to="the_game" method="_mouth_buy_enter"]
+[connection signal="mouse_exited" from="the_game/mouth/button" to="the_game" method="_mouth_buy_exit"]
+[connection signal="pressed" from="the_game/mouth/button" to="the_game" method="_mouth_pressed"]
+[connection signal="mouse_entered" from="the_game/dog/button" to="the_game" method="_dog_buy_enter"]
+[connection signal="mouse_exited" from="the_game/dog/button" to="the_game" method="_dog_buy_exit"]
+[connection signal="pressed" from="the_game/dog/button" to="the_game" method="_dog_buy_pressed"]
+[connection signal="mouse_entered" from="the_game/chicken/button" to="the_game" method="_chicken_buy_enter"]
+[connection signal="mouse_exited" from="the_game/chicken/button" to="the_game" method="_chicken_buy_exit"]
+[connection signal="pressed" from="the_game/chicken/button" to="the_game" method="_chicken_buy_pressed"]
+[connection signal="pressed" from="the_game/save/button" to="the_game" method="_save"]
+[connection signal="pressed" from="the_game/erase_save" to="the_game" method="_erase_save"]
+[connection signal="pressed" from="the_game/erase_save/erase_save" to="the_game" method="_save_quit"]

@@ -1,7 +1,5 @@
 #notes
 to do next
- - add on hover notes (make them better)
-	- they def need a background or something
  - add modifications to each animal
  - add a cow
 

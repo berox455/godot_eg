@@ -4,8 +4,8 @@ var time: float  # in seconds
 var grass_eaten = 0
 const scaling = 1.2
 #pwr
-var click_munch = 1
-var munch = 0
+var click_munch = 1  # when you click the grass
+var munch = 0  # auto mouth click 0.1 for each
 var dog_munch = 1
 var chicken_munch = 1
 #lvl
@@ -277,33 +277,48 @@ func _chicken_buy_exit() -> void:
 	
 
 func _mouth_label_update() -> void:
-	var mouth_desc = """
-Each mouth can bite off 0.1 grass/s
+	var mouth_d = "Each mouth can bite off 0.1 grass/s"
+	var mouth_desc = "\n" + mouth_d + """
 "They're geneticaly engineered for munchin' on grass." -Munch Man
 """
+
 	$mouth/button.text = "   Buy lvl" + _abr(mouth_lvl + 1)
 	$mouth/button/cost.text = "cost: " + _abr(mouth_cost)
 	if mouth_lvl > 0:
 		$mouth/button/Label.text = str(munch) + " grass/s"
 		$mouth/button/Label.text += mouth_desc
 	else:
-		$mouth/button/Label.text = """
-"They're geneticaly engineered for munchin' on grass." -Munch Man
-"""
+		$mouth/button/Label.text = mouth_d
 	
 	
 func _dog_label_update() -> void:
+	var dog_d = "Dog bites off 1 grass/s per lvl"
+	var dog_desc = "\n" + dog_d + """
+"Thier stomach problems must be imense!" -Random bystander
+"""
+
 	$dog/button.text = "   Buy lvl" + _abr(dog_lvl + 1)
 	$dog/button/cost.text = "cost: " + _abr(dog_cost)
-	$dog/button/Label.text = str(dog_munch * dog_lvl) + " grass/s"
-	$dog/button/Label.text += ""
-	
+	if dog_lvl > 0:
+		$dog/button/Label.text = str(dog_munch * dog_lvl) + " grass/s"
+		$dog/button/Label.text += dog_desc
+	else:
+		$dog/button/Label.text = dog_d
+
 
 func _chicken_label_update() -> void:
+	var chicken_d = "Chicken pecks 10 grass/s per lvl"
+	var chicken_desc = "\n" + chicken_d + """
+"Haven't eaten in days is what I'd wager makes 'em this hungry! Or they just got stomach worms" -Chicken seller
+"""
+
 	$chicken/button.text = "   Buy lvl" + _abr(chicken_lvl + 1)
 	$chicken/button/cost.text = "cost: " + _abr(chicken_cost)
-	$chicken/button/Label.text = str(chicken_munch * 10 * chicken_lvl)+ " grass/s"
-	$dog/button/Label.text += ""
+	if chicken_lvl > 0:
+		$chicken/button/Label.text = str(chicken_munch * 10 * chicken_lvl)+ " grass/s"
+		$chicken/button/Label.text += chicken_desc
+	else:
+		$chicken/button/Label.text = chicken_d
 	
 
 func _click_play() -> void:
