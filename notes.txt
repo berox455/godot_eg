@@ -2,6 +2,9 @@
 to do next
  - add modifications to each animal
  - add a cow
+ - remake munch, so you don't have to save it
+	easy - just everytime do munch times lvl
+	only one who doesn't do it is mouth so far
 
 to do after that
  - add more sounds to grass eating (at PC)
@@ -12,3 +15,39 @@ to do some time in the future
 --modifications--
 maybe a mutation or something
 two heads?
+
+maybe a game remake, the idea:
+	you have 1 grass that grows every so often
+	you can cut the grass with whatever you have, at the start you maybe just rip it out with your bare hands
+	you can upgrade your tool -> scythe, knife, katana etc.
+	you can buy more land for grass
+	you can buy different types of grass, which all cost and sell for different money
+	you also have "pets"
+	- such as dogs, chicken, cows and other animals
+	- some could eat the grass you cut and give something in exchange
+	- or you could just feed them and then sell for meat or something
+	but then the perspective would have to probably be top down, so you can clearly see your land
+	so maybe instead of buying more land, you can buy better fertilizers, so your grass can grow faster
+	and then buy new grass intead of the one, which you currently have
+	you could be able to buy a helper, who cuts the grass as soon as it grows
+	otherwise you would have to cut it manually
+	//maybe all this would be too complex, I dunno
+
+cow concept:
+	has children, which you can upgrade with milk, the upgrades have a limit(because then they become a full grown cow)
+	/ in other words /
+	upgradeable cow children
+	
+	eats a ton of grass, bc it's a damn cow
+	- anywhere from 40 to 100
+	- maybe 50 and then some milk
+	- 100 if there are no children
+	- children eat half as much as a grown cow
+	
+	costs like 10k grass, or maybe we should abandon grass as a currency (probably in the remake)
+	
+
+added so far:
+	cost_calc
+	removed depricated dog_upgrade
+	cow - cost, munch, buy

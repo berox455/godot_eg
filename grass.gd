@@ -5,24 +5,25 @@ var grass_eaten = 0
 const scaling = 1.2
 #pwr
 var click_munch = 1  # when you click the grass
-var munch = 0  # auto mouth click 0.1 for each
-var dog_munch = 1
-var chicken_munch = 1
+var munch = 0  # auto mouth click 0.1 for each per second
+var dog_munch = 1  # munches 1 per second
+var chicken_munch = 1  # munches 1 per 0.1 second
+var cow_munch = 500  # munches 500 per 10 seconds w child, 1000 wo
 #lvl
 var mouth_lvl = 0
 var dog_lvl = 0
-var dog_upgrade_lvl = 0
 var chicken_lvl = 0
+var cow_lvl = 0
 #base cost
 const mouth_base = 15
 const dog_base = 100
-const dog_upgrade_base = 140
 const chicken_base = 1100
+const cow_base = 10000
 #cost
 var mouth_cost: float
 var dog_cost: float
-var dog_upgrade_cost: float
 var chicken_cost: float
+var cow_cost: float
 #LoadSave
 const save_dir: String = "user://save.json"
 
@@ -39,14 +40,15 @@ func _ready() -> void:
 	mr_save = _load()
 	if len(mr_save) > 1:
 		_unload()
-	mouth_cost = mouth_base * (scaling ** mouth_lvl)
-	dog_cost = dog_base * (scaling ** dog_lvl)
-	dog_upgrade_cost = dog_upgrade_base * (scaling ** dog_upgrade_lvl)
-	chicken_cost = chicken_base * (scaling ** chicken_lvl)
+	mouth_cost = _cost_calc(mouth_base, mouth_lvl)
+	dog_cost = _cost_calc(dog_base, dog_lvl)
+	chicken_cost = _cost_calc(chicken_base, chicken_lvl)
+	cow_cost = _cost_calc(cow_base, cow_lvl)
 	
 	_mouth_label_update()
 	_dog_label_update()
 	_chicken_label_update()
+	_cow_label_update()
 	
 	if !(mouth_lvl > 4):
 		$dog/TextBlock.hide()
@@ -113,6 +115,7 @@ func _get_time() -> void:
 			node.add_theme_color_override("font_color", col)
 		i += 1
 
+
 func _abr(number: int) -> String:
 	var k: float = 1000
 	var m: float = 1000000
@@ -153,10 +156,11 @@ func _save() -> void:
 	"mouth_lvl": mouth_lvl,
 	"munch": munch,
 	"dog_lvl": dog_lvl,
-	"dog_upgrade_lvl": dog_upgrade_lvl,
 	"dog_munch": dog_munch,
 	"chicken_lvl": chicken_lvl,
-	"chicken_munch": chicken_munch
+	"chicken_munch": chicken_munch,
+	"cow_lvl": cow_lvl,
+	"cow_munch": cow_munch
 	}
 	
 	var file = FileAccess.open(save_dir, FileAccess.WRITE)
@@ -186,7 +190,6 @@ func _unload() -> void:
 			"mouth_lvl": mouth_lvl = saved
 			"munch": munch = saved
 			"dog_lvl": dog_lvl = saved
-			"dog_upgrade_lvl": dog_upgrade_lvl = saved
 			"dog_munch": dog_munch = saved
 			"chicken_lvl": chicken_lvl = saved
 			"chicken_munch": chicken_munch = saved
@@ -207,7 +210,7 @@ func _mouth_pressed() -> void:
 		grass_eaten -= mouth_cost
 		mouth_lvl += 1
 		munch += 0.1
-		mouth_cost = mouth_base * (scaling ** mouth_lvl)
+		mouth_cost = _cost_calc(mouth_base, mouth_lvl)
 		_mouth_label_update()
 		
 		if mouth_lvl == 5:
@@ -222,7 +225,7 @@ func _dog_buy_pressed() -> void:
 		_click_play()
 		grass_eaten -= dog_cost
 		dog_lvl += 1
-		dog_cost = dog_base * (scaling ** dog_lvl)
+		dog_cost = _cost_calc(dog_base, dog_lvl)
 		_dog_label_update()
 		
 		if dog_lvl == 5:
@@ -235,8 +238,17 @@ func _chicken_buy_pressed() -> void:
 		_click_play()
 		grass_eaten -= chicken_cost
 		chicken_lvl += 1
-		chicken_cost = chicken_base * (scaling ** chicken_lvl)
+		chicken_cost = _cost_calc(chicken_base, chicken_lvl)
 		_chicken_label_update()
+
+
+func _cow_buy_pressed() -> void:
+	if grass_eaten >= cow_cost:
+		_click_play()
+		grass_eaten -= cow_cost
+		cow_lvl += 1
+		cow_cost = _cost_calc(cow_base, cow_lvl)
+		_cow_label_update()
 
 
 func _erase_save() -> void:
@@ -274,6 +286,14 @@ func _chicken_buy_enter() -> void:
 
 func _chicken_buy_exit() -> void:
 	$chicken/button/Label.hide()
+
+
+func _cow_buy_enter() -> void:
+	$cow/button/Label.show()
+
+
+func _cow_buy_exit() -> void:
+	$cow/button/Label.hide()
 	
 
 func _mouth_label_update() -> void:
@@ -319,6 +339,10 @@ func _chicken_label_update() -> void:
 		$chicken/button/Label.text += chicken_desc
 	else:
 		$chicken/button/Label.text = chicken_d
+		
+
+func _cow_label_update() -> void:
+	pass
 	
 
 func _click_play() -> void:
@@ -336,3 +360,6 @@ func _spawn_number() -> void:
 	new_label.add_theme_font_size_override("font_size", 30)
 	new_label.z_index = 3
 	
+
+func _cost_calc(base_cost, lvl) -> float:
+	return base_cost * (scaling ** lvl)

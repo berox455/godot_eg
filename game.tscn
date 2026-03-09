@@ -250,6 +250,44 @@ text = "test"
 fit_content = true
 scroll_active = false
 
+[node name="cow" type="Node" parent="the_game" unique_id=469185900]
+
+[node name="button" type="Button" parent="the_game/cow" unique_id=641531925]
+offset_left = 490.0
+offset_top = 323.0
+offset_right = 896.0
+offset_bottom = 420.0
+theme_override_font_sizes/font_size = 30
+text = "   Cow lvl1"
+alignment = 0
+
+[node name="cost" type="RichTextLabel" parent="the_game/cow/button" unique_id=407177894]
+layout_mode = 0
+offset_left = 164.0
+offset_top = 45.000004
+offset_right = 232.0
+offset_bottom = 73.0
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 20
+text = "cost: 0 "
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Label" type="RichTextLabel" parent="the_game/cow/button" unique_id=1000712625]
+visible = false
+z_index = 2
+layout_mode = 0
+offset_left = -72.0
+offset_top = 97.0
+offset_right = 406.0
+offset_bottom = 157.83636
+theme_override_font_sizes/normal_font_size = 24
+theme_override_styles/normal = ExtResource("7_j5wjh")
+text = "test"
+fit_content = true
+scroll_active = false
+
 [node name="save" type="Node" parent="the_game" unique_id=1962212918]
 
 [node name="button" type="Button" parent="the_game/save" unique_id=37624365]
@@ -304,6 +342,9 @@ volume_db = 2.0
 [connection signal="mouse_entered" from="the_game/chicken/button" to="the_game" method="_chicken_buy_enter"]
 [connection signal="mouse_exited" from="the_game/chicken/button" to="the_game" method="_chicken_buy_exit"]
 [connection signal="pressed" from="the_game/chicken/button" to="the_game" method="_chicken_buy_pressed"]
+[connection signal="mouse_entered" from="the_game/cow/button" to="the_game" method="_cow_buy_enter"]
+[connection signal="mouse_exited" from="the_game/cow/button" to="the_game" method="_cow_buy_exit"]
+[connection signal="pressed" from="the_game/cow/button" to="the_game" method="_cow_buy_pressed"]
 [connection signal="pressed" from="the_game/save/button" to="the_game" method="_save"]
 [connection signal="pressed" from="the_game/erase_save" to="the_game" method="_erase_save"]
 [connection signal="pressed" from="the_game/erase_save/erase_save" to="the_game" method="_save_quit"]
