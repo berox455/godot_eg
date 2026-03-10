@@ -2,6 +2,7 @@
 to do next
  - add modifications to each animal
  - add a cow
+ - change all button click functions to not include buy in their name just like mouth
  - remake munch, so you don't have to save it
 	easy - just everytime do munch times lvl
 	only one who doesn't do it is mouth so far

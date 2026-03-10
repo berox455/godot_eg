@@ -5,7 +5,7 @@ var grass_eaten = 0
 const scaling = 1.2
 #pwr
 var click_munch = 1  # when you click the grass
-var munch = 0  # auto mouth click 0.1 for each per second
+var munch = 0.1  # auto mouth click 0.1 for each per second
 var dog_munch = 1  # munches 1 per second
 var chicken_munch = 1  # munches 1 per 0.1 second
 var cow_munch = 500  # munches 500 per 10 seconds w child, 1000 wo
@@ -79,9 +79,11 @@ func _get_time() -> void:
 	
 	#munching
 	if time == floor(time):
-		grass_eaten += munch
+		grass_eaten += munch * mouth_lvl
 		if dog_lvl > 0:
 			grass_eaten += dog_munch * dog_lvl
+		if cow_lvl > 0 and int(floor(time)) % 10 == 0:
+			grass_eaten += cow_munch * cow_lvl
 	
 	if chicken_lvl > 0:
 		grass_eaten += chicken_munch * chicken_lvl
@@ -154,13 +156,9 @@ func _save() -> void:
 	"grass_eaten": grass_eaten,
 	"click_much": click_munch,
 	"mouth_lvl": mouth_lvl,
-	"munch": munch,
 	"dog_lvl": dog_lvl,
-	"dog_munch": dog_munch,
 	"chicken_lvl": chicken_lvl,
-	"chicken_munch": chicken_munch,
-	"cow_lvl": cow_lvl,
-	"cow_munch": cow_munch
+	"cow_lvl": cow_lvl
 	}
 	
 	var file = FileAccess.open(save_dir, FileAccess.WRITE)
@@ -188,11 +186,9 @@ func _unload() -> void:
 			"grass_eaten": grass_eaten = saved
 			"click_much": click_munch = saved
 			"mouth_lvl": mouth_lvl = saved
-			"munch": munch = saved
 			"dog_lvl": dog_lvl = saved
-			"dog_munch": dog_munch = saved
 			"chicken_lvl": chicken_lvl = saved
-			"chicken_munch": chicken_munch = saved
+			"cow_lvl": cow_lvl = saved
 
 
 func _eat_grass_pressed() -> void:
@@ -209,7 +205,6 @@ func _mouth_pressed() -> void:
 		_click_play()
 		grass_eaten -= mouth_cost
 		mouth_lvl += 1
-		munch += 0.1
 		mouth_cost = _cost_calc(mouth_base, mouth_lvl)
 		_mouth_label_update()
 		
@@ -342,7 +337,8 @@ func _chicken_label_update() -> void:
 		
 
 func _cow_label_update() -> void:
-	pass
+	$cow/button.text = "   Cow lvl" + _abr(cow_lvl + 1)
+	$cow/button/cost.text = "cost: " + _abr(cow_cost)
 	
 
 func _click_play() -> void:
