@@ -31,7 +31,7 @@ var mr_save: Dictionary
 var saving = 0
 #other
 var munching: int = 0
-var num_velocity: int = 1.5
+var num_velocity: int = 2  # the speed of numbers going up
 
 
 # Called when the node enters the scene tree for the first time.
@@ -67,6 +67,8 @@ func _process(delta: float) -> void:
 	else:
 		$eat_grass/grass_eaten.text = "grass eaten: " + _abr(grass_eaten)
 		
+		
+func _physics_process(delta: float) -> void:
 	var children = $Click_numbers.get_children()
 	for node in children:
 		var temp = node.get_position()
@@ -191,6 +193,19 @@ func _unload() -> void:
 			"cow_lvl": cow_lvl = saved
 
 
+func _erase_save() -> void:
+	_click_play()
+	var file = FileAccess.open(save_dir, FileAccess.WRITE)
+	file.store_var({})
+	file.close()
+
+
+func _save_quit() -> void:
+	_click_play()
+	_save()
+	get_tree().quit()
+
+
 func _eat_grass_pressed() -> void:
 	grass_eaten += click_munch
 	_spawn_number()
@@ -246,19 +261,6 @@ func _cow_buy_pressed() -> void:
 		_cow_label_update()
 
 
-func _erase_save() -> void:
-	_click_play()
-	var file = FileAccess.open(save_dir, FileAccess.WRITE)
-	file.store_var({})
-	file.close()
-
-
-func _save_quit() -> void:
-	_click_play()
-	_save()
-	get_tree().quit()
-
-
 func _mouth_buy_enter() -> void:
 	$mouth/button/Label.show()
 
@@ -297,7 +299,7 @@ func _mouth_label_update() -> void:
 "They're geneticaly engineered for munchin' on grass." -Munch Man
 """
 
-	$mouth/button.text = "   Buy lvl" + _abr(mouth_lvl + 1)
+	$mouth/button.text = "   Mouth lvl" + _abr(mouth_lvl + 1)
 	$mouth/button/cost.text = "cost: " + _abr(mouth_cost)
 	if mouth_lvl > 0:
 		$mouth/button/Label.text = str(munch) + " grass/s"
@@ -312,7 +314,7 @@ func _dog_label_update() -> void:
 "Thier stomach problems must be imense!" -Random bystander
 """
 
-	$dog/button.text = "   Buy lvl" + _abr(dog_lvl + 1)
+	$dog/button.text = "   Dog lvl" + _abr(dog_lvl + 1)
 	$dog/button/cost.text = "cost: " + _abr(dog_cost)
 	if dog_lvl > 0:
 		$dog/button/Label.text = str(dog_munch * dog_lvl) + " grass/s"
@@ -327,7 +329,7 @@ func _chicken_label_update() -> void:
 "Haven't eaten in days is what I'd wager makes 'em this hungry! Or they just got stomach worms" -Chicken seller
 """
 
-	$chicken/button.text = "   Buy lvl" + _abr(chicken_lvl + 1)
+	$chicken/button.text = "   Chicken lvl" + _abr(chicken_lvl + 1)
 	$chicken/button/cost.text = "cost: " + _abr(chicken_cost)
 	if chicken_lvl > 0:
 		$chicken/button/Label.text = str(chicken_munch * 10 * chicken_lvl)+ " grass/s"
@@ -337,8 +339,18 @@ func _chicken_label_update() -> void:
 		
 
 func _cow_label_update() -> void:
+	var cow_d = "Eats 100 grass/s"
+	var cow_desc = "\n" + cow_d + """
+"They be goin' moo" -Moo \\temporary pls change
+"""
+	
 	$cow/button.text = "   Cow lvl" + _abr(cow_lvl + 1)
 	$cow/button/cost.text = "cost: " + _abr(cow_cost)
+	if cow_lvl > 0:
+		$cow/button/Label.text = str(cow_munch / 10 * cow_lvl)+ " grass/s"
+		$cow/button/Label.text += cow_desc
+	else:
+		$cow/button/Label.text = cow_d
 	
 
 func _click_play() -> void:

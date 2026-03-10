@@ -91,6 +91,7 @@ texture = ExtResource("5_ryrav")
 [node name="mouth" type="Node" parent="the_game" unique_id=893768253]
 
 [node name="TextBlock" type="Sprite2D" parent="the_game/mouth" unique_id=922247649]
+visible = false
 position = Vector2(441, -177)
 scale = Vector2(1, 0.99999994)
 texture = ExtResource("4_fc0e3")
@@ -107,19 +108,19 @@ autowrap_mode = 0
 metadata/_edit_use_anchors_ = true
 
 [node name="button" type="Button" parent="the_game/mouth" unique_id=1021568349]
-offset_left = 490.0
+offset_left = 386.0
 offset_top = -222.0
 offset_right = 820.0
 offset_bottom = -125.0
 theme_override_font_sizes/font_size = 30
-text = "   Buy lvl1"
+text = "   Mouth lvl1"
 alignment = 0
 
 [node name="cost" type="RichTextLabel" parent="the_game/mouth/button" unique_id=1172528957]
 layout_mode = 0
-offset_left = 164.0
-offset_top = 45.000004
-offset_right = 232.0
+offset_left = 268.0
+offset_top = 45.0
+offset_right = 336.0
 offset_bottom = 73.0
 mouse_filter = 2
 theme_override_font_sizes/normal_font_size = 20
@@ -146,6 +147,7 @@ scroll_active = false
 [node name="dog" type="Node" parent="the_game" unique_id=1740376036]
 
 [node name="TextBlock" type="Sprite2D" parent="the_game/dog" unique_id=1483019149]
+visible = false
 position = Vector2(441, 22.999992)
 scale = Vector2(1, 0.99999994)
 texture = ExtResource("4_fc0e3")
@@ -161,19 +163,19 @@ fit_content = true
 autowrap_mode = 0
 
 [node name="button" type="Button" parent="the_game/dog" unique_id=444973684]
-offset_left = 490.0
-offset_top = -22.000008
+offset_left = 386.0
+offset_top = -77.0
 offset_right = 820.0
-offset_bottom = 75.0
+offset_bottom = 20.000008
 theme_override_font_sizes/font_size = 30
-text = "   Buy lvl1"
+text = "   Dog lvl1"
 alignment = 0
 
 [node name="cost" type="RichTextLabel" parent="the_game/dog/button" unique_id=74538689]
 layout_mode = 0
-offset_left = 164.0
+offset_left = 268.0
 offset_top = 45.000004
-offset_right = 232.0
+offset_right = 336.0
 offset_bottom = 73.0
 mouse_filter = 2
 theme_override_font_sizes/normal_font_size = 20
@@ -199,6 +201,7 @@ scroll_active = false
 [node name="chicken" type="Node" parent="the_game" unique_id=667762880]
 
 [node name="TextBlock" type="Sprite2D" parent="the_game/chicken" unique_id=445632120]
+visible = false
 position = Vector2(441, 223)
 scale = Vector2(1, 0.99999994)
 texture = ExtResource("4_fc0e3")
@@ -215,19 +218,19 @@ autowrap_mode = 0
 metadata/_edit_use_anchors_ = true
 
 [node name="button" type="Button" parent="the_game/chicken" unique_id=460080043]
-offset_left = 490.0
-offset_top = 178.0
+offset_left = 386.0
+offset_top = 54.0
 offset_right = 820.0
-offset_bottom = 275.0
+offset_bottom = 151.0
 theme_override_font_sizes/font_size = 30
-text = "   Buy lvl1"
+text = "   Chicken lvl1"
 alignment = 0
 
 [node name="cost" type="RichTextLabel" parent="the_game/chicken/button" unique_id=1766398019]
 layout_mode = 0
-offset_left = 164.0
-offset_top = 45.000004
-offset_right = 232.0
+offset_left = 268.0
+offset_top = 45.0
+offset_right = 336.0
 offset_bottom = 73.0
 mouse_filter = 2
 theme_override_font_sizes/normal_font_size = 20
@@ -253,19 +256,19 @@ scroll_active = false
 [node name="cow" type="Node" parent="the_game" unique_id=469185900]
 
 [node name="button" type="Button" parent="the_game/cow" unique_id=641531925]
-offset_left = 490.0
-offset_top = 323.0
-offset_right = 896.0
-offset_bottom = 420.0
+offset_left = 386.0
+offset_top = 185.0
+offset_right = 820.0
+offset_bottom = 282.0
 theme_override_font_sizes/font_size = 30
 text = "   Cow lvl1"
 alignment = 0
 
 [node name="cost" type="RichTextLabel" parent="the_game/cow/button" unique_id=407177894]
 layout_mode = 0
-offset_left = 164.0
-offset_top = 45.000004
-offset_right = 232.0
+offset_left = 268.0
+offset_top = 45.0
+offset_right = 336.0
 offset_bottom = 73.0
 mouse_filter = 2
 theme_override_font_sizes/normal_font_size = 20
