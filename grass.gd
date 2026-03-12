@@ -50,13 +50,14 @@ func _ready() -> void:
 	_chicken_label_update()
 	_cow_label_update()
 	
-	if !(mouth_lvl > 4):
-		$dog/TextBlock.hide()
+	if !(mouth_lvl > 4 or dog_lvl > 0):
 		$dog/button.hide()
 		
 	if !(dog_lvl > 4 or chicken_lvl > 0):
-		$chicken/TextBlock.hide()
 		$chicken/button.hide()
+		
+	if !(chicken_lvl > 4 or cow_lvl > 0):
+		$cow/button.hide()
 	$save/saving.visible_characters = saving
 
 
@@ -206,7 +207,7 @@ func _save_quit() -> void:
 	get_tree().quit()
 
 
-func _eat_grass_pressed() -> void:
+func _eat_grass() -> void:
 	grass_eaten += click_munch
 	_spawn_number()
 	$eat_grass/Munch.pitch_scale = randf_range(0.9, 1.5)
@@ -215,7 +216,7 @@ func _eat_grass_pressed() -> void:
 	munching = 2
 
 
-func _mouth_pressed() -> void:
+func _mouth_up() -> void:
 	if grass_eaten >= mouth_cost:
 		_click_play()
 		grass_eaten -= mouth_cost
@@ -230,7 +231,7 @@ func _mouth_pressed() -> void:
 			click_munch += 1
 
 
-func _dog_buy_pressed() -> void:
+func _dog_up() -> void:
 	if grass_eaten >= dog_cost:
 		_click_play()
 		grass_eaten -= dog_cost
@@ -243,16 +244,20 @@ func _dog_buy_pressed() -> void:
 			$chicken/button.show()
 
 
-func _chicken_buy_pressed() -> void:
+func _chicken_up() -> void:
 	if grass_eaten >= chicken_cost:
 		_click_play()
 		grass_eaten -= chicken_cost
 		chicken_lvl += 1
 		chicken_cost = _cost_calc(chicken_base, chicken_lvl)
 		_chicken_label_update()
+		
+		if chicken_lvl == 5:
+			$cow/TextBlock.show()
+			$cow/button.show()
 
 
-func _cow_buy_pressed() -> void:
+func _cow_up() -> void:
 	if grass_eaten >= cow_cost:
 		_click_play()
 		grass_eaten -= cow_cost
@@ -302,7 +307,7 @@ func _mouth_label_update() -> void:
 	$mouth/button.text = "   Mouth lvl" + _abr(mouth_lvl + 1)
 	$mouth/button/cost.text = "cost: " + _abr(mouth_cost)
 	if mouth_lvl > 0:
-		$mouth/button/Label.text = str(munch) + " grass/s"
+		$mouth/button/Label.text = str(munch * mouth_lvl) + " grass/s"
 		$mouth/button/Label.text += mouth_desc
 	else:
 		$mouth/button/Label.text = mouth_d
@@ -339,7 +344,7 @@ func _chicken_label_update() -> void:
 		
 
 func _cow_label_update() -> void:
-	var cow_d = "Eats 100 grass/s"
+	var cow_d = "Eats 50 grass/s"
 	var cow_desc = "\n" + cow_d + """
 "They be goin' moo" -Moo \\temporary pls change
 """

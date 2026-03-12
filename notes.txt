@@ -1,11 +1,7 @@
 #notes
 to do next
  - add modifications to each animal
- - add a cow
- - change all button click functions to not include buy in their name just like mouth
- - remake munch, so you don't have to save it
-	easy - just everytime do munch times lvl
-	only one who doesn't do it is mouth so far
+ - add a calfs
 
 to do after that
  - add more sounds to grass eating (at PC)
@@ -49,6 +45,11 @@ cow concept:
 	
 
 added so far:
-	cost_calc
-	removed depricated dog_upgrade
-	cow - cost, munch, buy
+	- changed position of buy buttons
+	- which made more space for other buttons
+	- cleaned them up a bit
+	- fixed not working counter for mouth munch in game
+	- added hide for cow
+	- removed unnessesary stuff
+	- switch buy button press names to animal_up meaning upgrade
+	
