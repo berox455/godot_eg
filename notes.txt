@@ -39,17 +39,12 @@ cow concept:
 	- anywhere from 40 to 100
 	- maybe 50 and then some milk
 	- 100 if there are no children
-	- children eat half as much as a grown cow
+	- children eat half as much as a grown cow?
 	
 	costs like 10k grass, or maybe we should abandon grass as a currency (probably in the remake)
 	
 
 added so far:
-	- changed position of buy buttons
-	- which made more space for other buttons
-	- cleaned them up a bit
-	- fixed not working counter for mouth munch in game
-	- added hide for cow
-	- removed unnessesary stuff
-	- switch buy button press names to animal_up meaning upgrade
-	
+	- rename chicken to hen
+	- fix textblock bugs
+	- start adding calf

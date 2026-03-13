@@ -29,6 +29,27 @@ corner_radius_top_right = 50
 corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hve3p"]
+bg_color = Color(0.44705883, 0.44705883, 0.4627451, 1)
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mfdv2"]
+bg_color = Color(0.34509805, 0.34509805, 0.35686275, 1)
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iotsf"]
+bg_color = Color(0.39215687, 0.39215687, 0.40784314, 1)
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+
 [node name="Node2D" type="Node2D" unique_id=1262863614]
 
 [node name="the_game" type="Node" parent="." unique_id=1269241689]
@@ -100,9 +121,9 @@ alignment = 0
 
 [node name="cost" type="RichTextLabel" parent="the_game/mouth/button" unique_id=1172528957]
 layout_mode = 0
-offset_left = 268.0
+offset_left = 218.0
 offset_top = 45.0
-offset_right = 336.0
+offset_right = 286.0
 offset_bottom = 73.0
 mouse_filter = 2
 theme_override_font_sizes/normal_font_size = 20
@@ -139,9 +160,9 @@ alignment = 0
 
 [node name="cost" type="RichTextLabel" parent="the_game/dog/button" unique_id=74538689]
 layout_mode = 0
-offset_left = 268.0
+offset_left = 218.0
 offset_top = 45.000004
-offset_right = 336.0
+offset_right = 286.0
 offset_bottom = 73.0
 mouse_filter = 2
 theme_override_font_sizes/normal_font_size = 20
@@ -164,22 +185,22 @@ text = "test"
 fit_content = true
 scroll_active = false
 
-[node name="chicken" type="Node" parent="the_game" unique_id=667762880]
+[node name="hen" type="Node" parent="the_game" unique_id=667762880]
 
-[node name="button" type="Button" parent="the_game/chicken" unique_id=460080043]
+[node name="button" type="Button" parent="the_game/hen" unique_id=460080043]
 offset_left = 4.0
 offset_top = -128.0
 offset_right = 438.0
 offset_bottom = -31.0
 theme_override_font_sizes/font_size = 30
-text = "   Chicken lvl1"
+text = "   Hen lvl1"
 alignment = 0
 
-[node name="cost" type="RichTextLabel" parent="the_game/chicken/button" unique_id=1766398019]
+[node name="cost" type="RichTextLabel" parent="the_game/hen/button" unique_id=1766398019]
 layout_mode = 0
-offset_left = 268.0
+offset_left = 218.0
 offset_top = 45.0
-offset_right = 336.0
+offset_right = 286.0
 offset_bottom = 73.0
 mouse_filter = 2
 theme_override_font_sizes/normal_font_size = 20
@@ -188,7 +209,7 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="Label" type="RichTextLabel" parent="the_game/chicken/button" unique_id=2077841984]
+[node name="Label" type="RichTextLabel" parent="the_game/hen/button" unique_id=2077841984]
 visible = false
 z_index = 2
 layout_mode = 0
@@ -215,9 +236,9 @@ alignment = 0
 
 [node name="cost" type="RichTextLabel" parent="the_game/cow/button" unique_id=407177894]
 layout_mode = 0
-offset_left = 268.0
+offset_left = 218.0
 offset_top = 45.0
-offset_right = 336.0
+offset_right = 286.0
 offset_bottom = 73.0
 mouse_filter = 2
 theme_override_font_sizes/normal_font_size = 20
@@ -227,6 +248,46 @@ scroll_active = false
 autowrap_mode = 0
 
 [node name="Label" type="RichTextLabel" parent="the_game/cow/button" unique_id=1000712625]
+visible = false
+z_index = 2
+layout_mode = 0
+offset_left = -24.0
+offset_top = 97.0
+offset_right = 454.0
+offset_bottom = 157.83636
+theme_override_font_sizes/normal_font_size = 24
+theme_override_styles/normal = ExtResource("7_j5wjh")
+text = "test"
+fit_content = true
+scroll_active = false
+
+[node name="calf" type="Node" parent="the_game" unique_id=16591919]
+
+[node name="button" type="Button" parent="the_game/calf" unique_id=1445420030]
+offset_left = 797.0
+offset_top = -83.0
+offset_right = 947.0
+offset_bottom = 67.0
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_hve3p")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_mfdv2")
+theme_override_styles/hover = SubResource("StyleBoxFlat_iotsf")
+text = "Calf lvl1"
+
+[node name="cost" type="RichTextLabel" parent="the_game/calf/button" unique_id=816974928]
+layout_mode = 0
+offset_left = 36.0
+offset_top = 97.0
+offset_right = 104.0
+offset_bottom = 125.0
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 20
+text = "cost: 0 "
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Label" type="RichTextLabel" parent="the_game/calf/button" unique_id=1151574097]
 visible = false
 z_index = 2
 layout_mode = 0
@@ -291,12 +352,14 @@ volume_db = 2.0
 [connection signal="mouse_entered" from="the_game/dog/button" to="the_game" method="_dog_buy_enter"]
 [connection signal="mouse_exited" from="the_game/dog/button" to="the_game" method="_dog_buy_exit"]
 [connection signal="pressed" from="the_game/dog/button" to="the_game" method="_dog_up"]
-[connection signal="mouse_entered" from="the_game/chicken/button" to="the_game" method="_chicken_buy_enter"]
-[connection signal="mouse_exited" from="the_game/chicken/button" to="the_game" method="_chicken_buy_exit"]
-[connection signal="pressed" from="the_game/chicken/button" to="the_game" method="_chicken_up"]
+[connection signal="mouse_entered" from="the_game/hen/button" to="the_game" method="_hen_buy_enter"]
+[connection signal="mouse_exited" from="the_game/hen/button" to="the_game" method="_hen_buy_exit"]
+[connection signal="pressed" from="the_game/hen/button" to="the_game" method="_hen_up"]
 [connection signal="mouse_entered" from="the_game/cow/button" to="the_game" method="_cow_buy_enter"]
 [connection signal="mouse_exited" from="the_game/cow/button" to="the_game" method="_cow_buy_exit"]
 [connection signal="pressed" from="the_game/cow/button" to="the_game" method="_cow_up"]
+[connection signal="mouse_entered" from="the_game/calf/button" to="the_game" method="_calf_buy_enter"]
+[connection signal="mouse_exited" from="the_game/calf/button" to="the_game" method="_calf_buy_exit"]
 [connection signal="pressed" from="the_game/save/button" to="the_game" method="_save"]
 [connection signal="pressed" from="the_game/erase_save" to="the_game" method="_erase_save"]
 [connection signal="pressed" from="the_game/erase_save/erase_save" to="the_game" method="_save_quit"]

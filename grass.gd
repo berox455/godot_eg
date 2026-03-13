@@ -7,22 +7,22 @@ const scaling = 1.2
 var click_munch = 1  # when you click the grass
 var munch = 0.1  # auto mouth click 0.1 for each per second
 var dog_munch = 1  # munches 1 per second
-var chicken_munch = 1  # munches 1 per 0.1 second
-var cow_munch = 500  # munches 500 per 10 seconds w child, 1000 wo
+var hen_munch = 1  # munches 1 per 0.1 second
+var cow_munch = 800  # munches 500 per 10 seconds w child, 800 wo
 #lvl
 var mouth_lvl = 0
 var dog_lvl = 0
-var chicken_lvl = 0
+var hen_lvl = 0
 var cow_lvl = 0
 #base cost
 const mouth_base = 15
 const dog_base = 100
-const chicken_base = 1100
+const hen_base = 1100
 const cow_base = 10000
 #cost
 var mouth_cost: float
 var dog_cost: float
-var chicken_cost: float
+var hen_cost: float
 var cow_cost: float
 #LoadSave
 const save_dir: String = "user://save.json"
@@ -42,21 +42,22 @@ func _ready() -> void:
 		_unload()
 	mouth_cost = _cost_calc(mouth_base, mouth_lvl)
 	dog_cost = _cost_calc(dog_base, dog_lvl)
-	chicken_cost = _cost_calc(chicken_base, chicken_lvl)
+	hen_cost = _cost_calc(hen_base, hen_lvl)
 	cow_cost = _cost_calc(cow_base, cow_lvl)
 	
+	$calf/button.hide()
 	_mouth_label_update()
 	_dog_label_update()
-	_chicken_label_update()
+	_hen_label_update()
 	_cow_label_update()
 	
 	if !(mouth_lvl > 4 or dog_lvl > 0):
 		$dog/button.hide()
 		
-	if !(dog_lvl > 4 or chicken_lvl > 0):
-		$chicken/button.hide()
+	if !(dog_lvl > 4 or hen_lvl > 0):
+		$hen/button.hide()
 		
-	if !(chicken_lvl > 4 or cow_lvl > 0):
+	if !(hen_lvl > 4 or cow_lvl > 0):
 		$cow/button.hide()
 	$save/saving.visible_characters = saving
 
@@ -88,8 +89,8 @@ func _get_time() -> void:
 		if cow_lvl > 0 and int(floor(time)) % 10 == 0:
 			grass_eaten += cow_munch * cow_lvl
 	
-	if chicken_lvl > 0:
-		grass_eaten += chicken_munch * chicken_lvl
+	if hen_lvl > 0:
+		grass_eaten += hen_munch * hen_lvl
 	
 	#saving
 	if time == int(time) and int(time) % 120 == 0:
@@ -160,7 +161,7 @@ func _save() -> void:
 	"click_much": click_munch,
 	"mouth_lvl": mouth_lvl,
 	"dog_lvl": dog_lvl,
-	"chicken_lvl": chicken_lvl,
+	"hen_lvl": hen_lvl,
 	"cow_lvl": cow_lvl
 	}
 	
@@ -190,7 +191,7 @@ func _unload() -> void:
 			"click_much": click_munch = saved
 			"mouth_lvl": mouth_lvl = saved
 			"dog_lvl": dog_lvl = saved
-			"chicken_lvl": chicken_lvl = saved
+			"hen_lvl": hen_lvl = saved
 			"cow_lvl": cow_lvl = saved
 
 
@@ -225,7 +226,6 @@ func _mouth_up() -> void:
 		_mouth_label_update()
 		
 		if mouth_lvl == 5:
-			$dog/TextBlock.show()
 			$dog/button.show()
 		if mouth_lvl % 25 == 0:
 			click_munch += 1
@@ -240,20 +240,18 @@ func _dog_up() -> void:
 		_dog_label_update()
 		
 		if dog_lvl == 5:
-			$chicken/TextBlock.show()
-			$chicken/button.show()
+			$hen/button.show()
 
 
-func _chicken_up() -> void:
-	if grass_eaten >= chicken_cost:
+func _hen_up() -> void:
+	if grass_eaten >= hen_cost:
 		_click_play()
-		grass_eaten -= chicken_cost
-		chicken_lvl += 1
-		chicken_cost = _cost_calc(chicken_base, chicken_lvl)
-		_chicken_label_update()
+		grass_eaten -= hen_cost
+		hen_lvl += 1
+		hen_cost = _cost_calc(hen_base, hen_lvl)
+		_hen_label_update()
 		
-		if chicken_lvl == 5:
-			$cow/TextBlock.show()
+		if hen_lvl == 5:
 			$cow/button.show()
 
 
@@ -282,12 +280,12 @@ func _dog_buy_exit() -> void:
 	$dog/button/Label.hide()
 
 
-func _chicken_buy_enter() -> void:
-	$chicken/button/Label.show()
+func _hen_buy_enter() -> void:
+	$hen/button/Label.show()
 
 
-func _chicken_buy_exit() -> void:
-	$chicken/button/Label.hide()
+func _hen_buy_exit() -> void:
+	$hen/button/Label.hide()
 
 
 func _cow_buy_enter() -> void:
@@ -296,6 +294,14 @@ func _cow_buy_enter() -> void:
 
 func _cow_buy_exit() -> void:
 	$cow/button/Label.hide()
+
+
+func _calf_buy_enter() -> void:
+	$calf/button/Label.show()
+
+
+func _calf_buy_exit() -> void:
+	$calf/button/Label.hide()
 	
 
 func _mouth_label_update() -> void:
@@ -328,23 +334,23 @@ func _dog_label_update() -> void:
 		$dog/button/Label.text = dog_d
 
 
-func _chicken_label_update() -> void:
-	var chicken_d = "Chicken pecks 10 grass/s per lvl"
-	var chicken_desc = "\n" + chicken_d + """
-"Haven't eaten in days is what I'd wager makes 'em this hungry! Or they just got stomach worms" -Chicken seller
+func _hen_label_update() -> void:
+	var hen_d = "hen pecks 10 grass/s per lvl"
+	var hen_desc = "\n" + hen_d + """
+"Haven't eaten in days is what I'd wager makes 'em this hungry! Or they just got stomach worms" -hen seller
 """
 
-	$chicken/button.text = "   Chicken lvl" + _abr(chicken_lvl + 1)
-	$chicken/button/cost.text = "cost: " + _abr(chicken_cost)
-	if chicken_lvl > 0:
-		$chicken/button/Label.text = str(chicken_munch * 10 * chicken_lvl)+ " grass/s"
-		$chicken/button/Label.text += chicken_desc
+	$hen/button.text = "   Hen lvl" + _abr(hen_lvl + 1)
+	$hen/button/cost.text = "cost: " + _abr(hen_cost)
+	if hen_lvl > 0:
+		$hen/button/Label.text = str(hen_munch * 10 * hen_lvl)+ " grass/s"
+		$hen/button/Label.text += hen_desc
 	else:
-		$chicken/button/Label.text = chicken_d
+		$hen/button/Label.text = hen_d
 		
 
 func _cow_label_update() -> void:
-	var cow_d = "Eats 50 grass/s"
+	var cow_d = "Eats 80 grass/s"
 	var cow_desc = "\n" + cow_d + """
 "They be goin' moo" -Moo \\temporary pls change
 """
@@ -354,6 +360,7 @@ func _cow_label_update() -> void:
 	if cow_lvl > 0:
 		$cow/button/Label.text = str(cow_munch / 10 * cow_lvl)+ " grass/s"
 		$cow/button/Label.text += cow_desc
+		$calf/button.show()
 	else:
 		$cow/button/Label.text = cow_d
 	
