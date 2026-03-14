@@ -1,0 +1,15 @@
+latest changes:
+	bug fixes
+		- fix textblock bugs
+		- fix performance issue, where click numbers dissapeared, 
+		but weren't properly deleted (for some reason, 
+		I tried deleting them, but it wasn't working. 
+		Now it is working though)
+	additions
+		- rename chicken to hen
+		- start adding calf
+		- add working calf (or at least I think)
+		- with that add milk system
+	
+	- cows now work as intended (I hope)
+	

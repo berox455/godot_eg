@@ -108,6 +108,19 @@ stream = ExtResource("4_7jktm")
 position = Vector2(288, 272)
 texture = ExtResource("5_ryrav")
 
+[node name="milk" type="RichTextLabel" parent="the_game" unique_id=310601319]
+offset_left = 458.0
+offset_top = -14.0
+offset_right = 534.0
+offset_bottom = 26.0
+theme_override_colors/default_color = Color(0.91764706, 1, 0.8745098, 1)
+theme_override_font_sizes/normal_font_size = 24
+text = "Milk: 0"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+autowrap_trim_flags = 0
+
 [node name="mouth" type="Node" parent="the_game" unique_id=893768253]
 
 [node name="button" type="Button" parent="the_game/mouth" unique_id=1021568349]
@@ -291,10 +304,10 @@ autowrap_mode = 0
 visible = false
 z_index = 2
 layout_mode = 0
-offset_left = -24.0
-offset_top = 97.0
-offset_right = 454.0
-offset_bottom = 157.83636
+offset_left = -220.0
+offset_top = 69.0
+offset_right = 15.0
+offset_bottom = 129.83636
 theme_override_font_sizes/normal_font_size = 24
 theme_override_styles/normal = ExtResource("7_j5wjh")
 text = "test"
@@ -360,6 +373,7 @@ volume_db = 2.0
 [connection signal="pressed" from="the_game/cow/button" to="the_game" method="_cow_up"]
 [connection signal="mouse_entered" from="the_game/calf/button" to="the_game" method="_calf_buy_enter"]
 [connection signal="mouse_exited" from="the_game/calf/button" to="the_game" method="_calf_buy_exit"]
+[connection signal="pressed" from="the_game/calf/button" to="the_game" method="_calf_up"]
 [connection signal="pressed" from="the_game/save/button" to="the_game" method="_save"]
 [connection signal="pressed" from="the_game/erase_save" to="the_game" method="_erase_save"]
 [connection signal="pressed" from="the_game/erase_save/erase_save" to="the_game" method="_save_quit"]

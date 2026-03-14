@@ -2,6 +2,10 @@
 to do next
  - add modifications to each animal
  - add a calfs
+ - "pets" should cost like 10x as much as the previous one
+ - but have like 7 to 8 x as much munch
+ - so it's a bit balanced and you don't only buy the latest pet
+ - plus add them modifications, to make older pets feel more fresh
 
 to do after that
  - add more sounds to grass eating (at PC)
@@ -45,6 +49,4 @@ cow concept:
 	
 
 added so far:
-	- rename chicken to hen
-	- fix textblock bugs
-	- start adding calf
+	added a change log, all changes are there
